@@ -70,16 +70,35 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Dev\SDL2_image-2.6.3\include;C:\Dev\SDL2\include;$(IncludePath)</IncludePath>
+    <ExternalIncludePath>C:\Dev\SDL2_image-2.6.3\lib\x64;C:\Dev\SDL2\lib\x64;$(ExternalIncludePath)</ExternalIncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Dev\SDL2_image-2.6.3\include;C:\Dev\SDL2\include;$(IncludePath)</IncludePath>
+    <ExternalIncludePath>C:\Dev\SDL2_image-2.6.3\lib\x64;C:\Dev\SDL2\lib\x64;$(ExternalIncludePath)</ExternalIncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Dev\SDL2_image-2.6.3\include;C:\Dev\SDL2\include;$(IncludePath)</IncludePath>
+    <ExternalIncludePath>C:\Dev\SDL2_image-2.6.3\lib\x64;C:\Dev\SDL2\lib\x64;$(ExternalIncludePath)</ExternalIncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\Dev\SDL2_image-2.6.3\include;C:\Dev\SDL2\include;$(IncludePath)</IncludePath>
+    <ExternalIncludePath>C:\Dev\SDL2_image-2.6.3\lib\x64;C:\Dev\SDL2\lib\x64;$(ExternalIncludePath)</ExternalIncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Dev\SDL2_image-2.6.3\include;C:\Dev\SDL2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Dev\SDL2_image-2.6.3\lib\x64;C:\Dev\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -90,12 +109,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Dev\SDL2_image-2.6.3\include;C:\Dev\SDL2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Dev\SDL2_image-2.6.3\lib\x64;C:\Dev\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -104,14 +126,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Dev\SDL2_image-2.6.3\include;C:\Dev\SDL2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\External\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-network-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalLibraryDirectories>C:\Dev\SDL2_image-2.6.3\lib\x64;C:\Dev\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -122,31 +143,179 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Dev\SDL2_image-2.6.3\include;C:\Dev\SDL2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\External\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system.lib;sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-network.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalLibraryDirectories>C:\Dev\SDL2_image-2.6.3\lib\x64;C:\Dev\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BJD 2.0\game.hpp" />
+    <ClInclude Include="BJD 2.0\game_obj.hpp" />
     <ClInclude Include="BJD 2.0\header.hpp" />
+    <ClInclude Include="BJD 2.0\textures.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BJD 2.0\button.cpp" />
     <ClCompile Include="BJD 2.0\deck.cpp" />
     <ClCompile Include="BJD 2.0\game.cpp" />
+    <ClCompile Include="BJD 2.0\game_obj.cpp" />
     <ClCompile Include="BJD 2.0\main.cpp" />
     <ClCompile Include="BJD 2.0\mainGame.cpp" />
     <ClCompile Include="BJD 2.0\players.cpp" />
+    <ClCompile Include="BJD 2.0\SDL.cpp" />
     <ClCompile Include="BJD 2.0\textures.cpp" />
     <ClCompile Include="BJD 2.0\updates.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="BJD 2.0\Textures\alagard.ttf" />
+    <Font Include="BJD 2.0\Textures\joystix-monospace.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="BJD 2.0\Textures\back button.png" />
+    <Image Include="BJD 2.0\Textures\bg_2nd.png" />
+    <Image Include="BJD 2.0\Textures\button.png" />
+    <Image Include="BJD 2.0\Textures\candle.gif" />
+    <Image Include="BJD 2.0\Textures\dead.png" />
+    <Image Include="BJD 2.0\Textures\deadrising.png" />
+    <Image Include="BJD 2.0\Textures\death.png" />
+    <Image Include="BJD 2.0\Textures\deck\Back1.png" />
+    <Image Include="BJD 2.0\Textures\deck\Back2.png" />
+    <Image Include="BJD 2.0\Textures\deck\Back3.png" />
+    <Image Include="BJD 2.0\Textures\deck\Back4.png" />
+    <Image Include="BJD 2.0\Textures\deck\Back5.png" />
+    <Image Include="BJD 2.0\Textures\deck\Back6.png" />
+    <Image Include="BJD 2.0\Textures\deck\Back7.png" />
+    <Image Include="BJD 2.0\Textures\deck\Back8.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture00(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture00.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture01(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture01.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture010(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture010.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture011(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture011.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture012(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture012.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture02(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture02.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture03(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture03.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture04(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture04.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture05(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture05.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture06(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture06.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture07(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture07.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture08(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture08.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture09(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture09.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture10(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture10.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture11(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture11.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture110(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture110.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture111(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture111.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture112(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture112.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture12(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture12.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture13(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture13.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture14(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture14.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture15(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture15.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture16(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture16.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture17(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture17.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture18(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture18.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture19(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture19.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture20(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture20.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture21(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture21.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture210(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture210.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture211(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture211.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture212(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture212.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture22(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture22.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture23(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture23.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture24(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture24.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture25(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture25.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture26(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture26.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture27(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture27.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture28(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture28.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture29(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture29.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture30(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture30.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture31(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture31.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture310(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture310.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture311(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture311.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture312(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture312.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture32(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture32.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture33(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture33.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture34(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture34.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture35(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture35.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture36(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture36.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture37(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture37.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture38(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture38.png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture39(1).png" />
+    <Image Include="BJD 2.0\Textures\deck\CardTexture39.png" />
+    <Image Include="BJD 2.0\Textures\graveyard_bg.png" />
+    <Image Include="BJD 2.0\Textures\icon.png" />
+    <Image Include="BJD 2.0\Textures\life.png" />
+    <Image Include="BJD 2.0\Textures\mainGameBG.png" />
+    <Image Include="BJD 2.0\Textures\mainGameBG_bottom.png" />
+    <Image Include="BJD 2.0\Textures\mainGameBG_top.png" />
+    <Image Include="BJD 2.0\Textures\mainmenubg.png" />
+    <Image Include="BJD 2.0\Textures\P1.png" />
+    <Image Include="BJD 2.0\Textures\P2.png" />
+    <Image Include="BJD 2.0\Textures\P3.png" />
+    <Image Include="BJD 2.0\Textures\P4.png" />
+    <Image Include="BJD 2.0\Textures\title.png" />
+    <Image Include="BJD 2.0\Textures\tombstone.png" />
+    <Image Include="BJD 2.0\Textures\tutorial.png" />
+    <Image Include="BJD 2.0\Textures\winnerr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BJD 2.0\Textures\dump-20231017T000955Z-001.zip" />
+    <None Include="BJD 2.0\Textures\Fonts-20231017T000941Z-001.zip" />
+    <None Include="BJD 2.0\Textures\Textures-20231017T000918Z-001.zip" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
