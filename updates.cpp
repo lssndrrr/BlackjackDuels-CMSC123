@@ -544,10 +544,10 @@ void game::renderMainGame(){
 }
 
 void game::renderDeck(){
-    const float cardWidth = C0Sprite.getGlobalBounds().width;
-    const float cardHeight = C0Sprite.getGlobalBounds().height;
+    const float cardWidth = tempCard.getGlobalBounds().width;
+    const float cardHeight = tempCard.getGlobalBounds().height;
 
-    const float spacing = C0Sprite.getGlobalBounds().width + 5.f;
+    const float spacing = tempCard.getGlobalBounds().width + 5.f;
     const float marginLeft = jackSprite.getGlobalBounds().width + 125.f;
     const float marginTop = window->getSize().y - (playerDashboard.charContainer.getGlobalBounds().height - 2.f);
 

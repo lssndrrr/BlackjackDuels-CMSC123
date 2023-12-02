@@ -441,6 +441,7 @@ void game::intTex(){
     num.setCharacterSize(30);
     num.setPosition(((float)window->getSize().x - num.getGlobalBounds().width)/2, 140.f);
 
+    tempCard.setTexture(C0);
     C0Sprite.setTexture(C0);
     C1Sprite.setTexture(C1);
     C2Sprite.setTexture(C2);

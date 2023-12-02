@@ -140,6 +140,7 @@ class game{
     Texture S11;
     Texture S12;
 
+    Sprite tempCard;
     Sprite C0Sprite;
     Sprite C1Sprite;
     Sprite C2Sprite;
