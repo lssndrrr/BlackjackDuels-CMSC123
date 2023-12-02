@@ -3,8 +3,9 @@ mingw64
 .vscode
 dump
 test
-Fonts/
+Fonts
 main.exe
+blackjack.exe
 sfml-audio-2.dll
 sfml-audio-d-2.dll
 sfml-graphics-2.dll
