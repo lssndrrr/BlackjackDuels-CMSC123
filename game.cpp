@@ -12,15 +12,16 @@ game::~game()
 }
 
 void game::intVar(){
-    state = gameState::mainMenu;
-    numPlayers = 0;
-    lose = false;
-    stand = false;
-    i = 1;
-    jackFlag = 0;
-    jakeFlag = 0;
-    jacksonFlag = 0;
-    jadeFlag = 0;
+    this->state = gameState::mainMenu;
+    this->numPlayers = 0;
+    this->lose = false;
+    this->stand = false;
+    this->i = 1;
+    this->jackFlag = 0;
+    this->jakeFlag = 0;
+    this->jacksonFlag = 0;
+    this->jadeFlag = 0;
+    this->paused = false;
 
     Vector2f heartSize = dead.getGlobalBounds().getSize();
     float initPos = jackSprite.getGlobalBounds().width + 125.f;
@@ -33,6 +34,12 @@ void game::intVar(){
         lives[x].setPosition(initPos + ((heartSize.x + 10.f) * x), window->getSize().y - heartSize.y - 40.f);
     }
 
+    pauseText.setFont(font);
+    pauseText.setString("PAUSED");
+    pauseText.setFillColor(Color::Red);
+    pauseText.setCharacterSize(100);
+    pauseText.setPosition((window->getSize().x / 2) - (pauseText.getGlobalBounds().width / 2), (window->getSize().y / 2) - (pauseText.getGlobalBounds().height / 2 + 25.f));
+    
     bustText.setFont(font);
     bustText.setString("BUST!");
     bustText.setFillColor(Color::Red);
@@ -126,7 +133,16 @@ void game::update(){
                     setCandle(); //found in textures.cpp
                     setDashboard();
                     updateGameEvent();
-                    renderMainGame();
+
+                    if(this->paused) {
+                        this->state = gameState::pauseScreen;
+                        while(this->paused) {
+                            updatePauseScreen();
+                            renderPauseScreen();
+                        }
+                    }
+                    else
+                        renderMainGame();
 
                     if(current->d.overallValue > 21){
                         cout << "Bust!" << endl;
@@ -215,7 +231,7 @@ void game::render(){
         renderChooseChar();
     }
     else if (state == gameState::pauseScreen) {
-        // do pausegame things
+        renderPauseScreen();
     }
     else if (state == gameState::winScreen) {
         window->draw(winner);

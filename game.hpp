@@ -205,13 +205,13 @@ class game{
     button jake;
     button jackson;
     button jade;
-    button pauseButton;
     button backButton;
     button tutorialButton;
     button tryAgainButton;
     button quitButton;
     button hitButton;
     button standButton;
+    button pauseButton;
 
     //Main game
     Texture mainGameBGTopTex;
@@ -235,6 +235,7 @@ class game{
     
     dashboard playerDashboard;
     Text overallValue;
+    Text pauseText;
     Text bustText;
     Text winner;
     Text loseText;
@@ -249,6 +250,7 @@ class game{
     list<player>::iterator current;
     bool lose;
     bool stand;
+    bool paused;
 
     int i, jackFlag, jakeFlag, jacksonFlag, jadeFlag;
     Clock candleTime, idle, bust;
@@ -281,6 +283,7 @@ public:
     void renderChooseNum();
     void renderChooseChar();
     void renderMainGame();
+    void renderPauseScreen();
 
     // main game render
     void renderButtons();

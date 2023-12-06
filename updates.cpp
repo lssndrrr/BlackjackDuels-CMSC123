@@ -365,6 +365,9 @@ void game::updateGameEvent() {
         } else if (event.type == Event::MouseMoved) {
             if (hitButton.isMouseOver(*window)) {
                 hitButton.setTextColor(Color::Green);
+            }
+            else if(pauseButton.isMouseOver(*window)) {
+                pauseButton.setTextColor(Color::Green);
             } 
             else if(standButton.isMouseOver(*window)) {
                 standButton.setTextColor(Color::Green);
@@ -372,10 +375,11 @@ void game::updateGameEvent() {
             else {
                 standButton.setTextColor(Color::Black);
                 hitButton.setTextColor(Color::Black);
+                pauseButton.setTextColor(Color::Black);
             }
         } else if (event.type == Event::MouseButtonPressed) {
             if (event.mouseButton.button == Mouse::Left) {
-                if (hitButton.isMouseOver(*window)) {
+                if(hitButton.isMouseOver(*window)) {
                     if (current->d.overallValue < 22) {
                         gameDeck.hitDeck(&(current->d));
                         current->d.findOverallValue();
@@ -388,10 +392,14 @@ void game::updateGameEvent() {
                     cout << endl;
                     cout << "Overall value: " << current->d.overallValue << endl;
                     updateOverallValue();
-                } else if (standButton.isMouseOver(*window)) {
+                } 
+                else if(standButton.isMouseOver(*window)) {
                     cout << "Your current overall value is " << current->d.overallValue << "! Next player!" << endl;
                     cout << endl;
                     stand = true;
+                }
+                else if(pauseButton.isMouseOver(*window)) {
+                    this->paused = true;
                 }
             }
         }
@@ -408,7 +416,6 @@ void game::updateOverallValue() {
 
 void game::updatePauseScreen(){
     while (this->window->pollEvent(this->event)) {
-        renderMainGame();
         switch (this->event.type){
             case Event::Closed:
                 window->close();
@@ -433,14 +440,16 @@ void game::updatePauseScreen(){
             case Event::MouseMoved:
                 if(startButton.isMouseOver(*window)){
                     startButton.setTextColor(Color::Green);
-                } else {
+                } 
+                else {
                     startButton.setTextColor(Color::Black);
                 }
                 break;
 
             case Event::MouseButtonPressed:
                 if (this->event.mouseButton.button == Mouse::Left && startButton.isMouseOver(*window)){
-                    state = mainGameScreen;
+                    this->paused = false;
+                    state = gameState::mainGameScreen;
                 }
                 break;
 
@@ -516,6 +525,13 @@ void game::renderBust() {
     window->display();
 }
 
+void game::renderPauseScreen() {
+    window->draw(mainMenuBG);
+    window->draw(pauseText);
+    startButton.drawButton(*window);
+    window->display();
+}
+
 void game::renderMainGame(){
     window->clear();
     window->draw(mainGameBGTop);
@@ -527,6 +543,7 @@ void game::renderMainGame(){
     playerDashboard.drawDashboard(*window);
     hitButton.drawButton(*window);
     standButton.drawButton(*window);
+    pauseButton.drawButton(*window);
 
     for(int x = 0; x < 10; x++) 
         window->draw(deaths[x]);

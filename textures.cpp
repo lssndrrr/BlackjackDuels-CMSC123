@@ -409,12 +409,13 @@ void game::intTex(){
     Title.setTexture(Titletexture);
     playButton.setButton("Play", Vector2f(175.0, 70.0), 50, &Buttontexture, Color::Black, &font);
     nextButton.setButton("Next", Vector2f(175.0, 70.0), 50, &Buttontexture, Color::Black, &font);
-    startButton.setButton("Start!", Vector2f(175.0, 70.0), 50, &Buttontexture, Color::Black, &font);
+    startButton.setButton("Continue", Vector2f(200.0, 70.0), 35, &Buttontexture, Color::Black, &font);
     twoP.setButton(" ", Vector2f(static_cast<float>(138), static_cast<float>(200)), 50, &C2, Color::Transparent, &font);
     threeP.setButton(" ", Vector2f(static_cast<float>(138), static_cast<float>(200)), 50, &D3, Color::Transparent, &font);
     fourP.setButton(" ", Vector2f(static_cast<float>(138), static_cast<float>(200)), 50, &S4, Color::Transparent, &font);
     hitButton.setButton("Hit", Vector2f(175.0, 70.0), 50, &Buttontexture, Color::Black, &font);
     standButton.setButton("Stand", Vector2f(175.0, 70.0), 50, &Buttontexture, Color::Black, &font);
+    pauseButton.setButton("||", Vector2f(70.0, 70.0), 40, &Buttontexture, Color::Black, &font);
     life.setTexture(lifeTex);
     dead.setTexture(deadTex);
 
@@ -553,7 +554,9 @@ void game::intTex(){
     float SBtextPosY = positionstartbtn.y + (startbtnSize.y / 2.f) - (startButton.text.getLocalBounds().height / 2.f + 17.0f);
     startButton.text.setPosition(SBtextPosX, SBtextPosY);
 
-    nextButton.setPosition(positionstartbtn);
+    Vector2f nextbtnSize = nextButton.btn.getLocalBounds().getSize();
+    Vector2f positionnextbtn((windowSize.x - nextbtnSize.x) / 2, (windowSize.y - nextbtnSize.y) / 2 + 250.5f);
+    nextButton.setPosition(positionnextbtn);
 
     float NBtextPosX = positionstartbtn.x + (startbtnSize.x / 2.f) - (nextButton.text.getLocalBounds().width / 2.f);
     nextButton.text.setPosition(NBtextPosX, SBtextPosY);
@@ -611,15 +614,7 @@ void game::intTex(){
     float jadeTextPosX = jadeBtnPos.x + (jadeBtnSize.x / 2.f) - (jade.text.getLocalBounds().width / 2.f);
     float jadeTextPosY = jadeBtnPos.y + jadeBtnSize.y + 10.f;
     jade.setPosition(jadeBtnPos);
-    jade.text.setPosition(jadeTextPosX, jadeTextPosY);
-
-    // Vector2f pausebtnSize = pauseButton.btn.getLocalBounds().getSize();
-    // Vector2f positionpausebtn((windowSize.x - pausebtnSize.x) / 2, (windowSize.y - pausebtnSize.y) / 2 + 180.5f);
-    // pauseButton.setPosition(positionpausebtn);
-    
-    // float PsBtextPosX = positionpausebtn.x + (pausebtnSize.x / 2.f) - (pauseButton.text.getLocalBounds().width / 2.f);
-    // float PsBtextPosY = positionpausebtn.y + (pausebtnSize.y / 2.f) - (pauseButton.text.getLocalBounds().height / 2.f + 13.5f);
-    // pauseButton.text.setPosition(PsBtextPosX, PsBtextPosY);    
+    jade.text.setPosition(jadeTextPosX, jadeTextPosY);  
 
     Vector2f tutorialbtnSize = tutorialButton.btn.getLocalBounds().getSize();
     Vector2f positiontutorialbtn((windowSize.x - tutorialbtnSize.x) / 2, (windowSize.y - tutorialbtnSize.y) / 2 + 210.5f);
@@ -668,4 +663,12 @@ void game::intTex(){
     float STBtextPosX = positionstandbtn.x + (standbtnSize.x / 2.f) - (standButton.text.getLocalBounds().width / 2.f);
     float STBtextPosY = positionstandbtn.y + (standbtnSize.y / 2.f) - (standButton.text.getLocalBounds().height / 2.f + 20.5f);
     standButton.text.setPosition(STBtextPosX, STBtextPosY);
+
+    Vector2f pausebtnSize = pauseButton.btn.getLocalBounds().getSize();
+    Vector2f positionpausebtn(windowSize.x - 100.f, 25.f);
+    pauseButton.setPosition(positionpausebtn);
+    
+    float pausetextPosX = positionpausebtn.x + (pausebtnSize.x / 2.f) - (pauseButton.text.getLocalBounds().width / 1.5f);
+    float pausetextPosY = positionpausebtn.y + (pausebtnSize.y / 2.f) - (pauseButton.text.getLocalBounds().height / 2.f + 15.f);
+    pauseButton.text.setPosition(pausetextPosX, pausetextPosY);
 }
