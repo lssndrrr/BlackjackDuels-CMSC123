@@ -12,7 +12,7 @@ game_object::game_object(const char *texture_sheet, int x, int y) {
 }
 
 void game_object::update() {
-	this->x_position++;
+	/*this->x_position++;
 
 	src_rect.h = 216;
 	src_rect.w = 384;
@@ -22,12 +22,12 @@ void game_object::update() {
 	dest_rect.x = this->x_position;
 	dest_rect.y = this->y_position;
 	dest_rect.h = src_rect.h * 2;
-	dest_rect.w = src_rect.w * 2;
+	dest_rect.w = src_rect.w * 2;*/
 }
 
 void game_object::render() {
 
 	// draws the texture
-	SDL_RenderCopy(game::renderer, this->obj_texture, &this->src_rect, &this->dest_rect);
+	// SDL_RenderCopy(game::renderer, this->obj_texture, &this->src_rect, &this->dest_rect);
 
 }

@@ -2,7 +2,13 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+/*
+This header file is for the game engine, basically.
+*/
+
+
 #include "header.hpp"
+#include "game_state.hpp"
 
 //class button{
 //    public:
@@ -39,22 +45,31 @@
 //    loseScreen
 //};
 
-class game{
+
+class game_state;
+class menu_state;
+
+class game {
 private:
-    int cnt;
     bool is_running;
     SDL_Window *window;
+    stack <game_state *> states;
+protected:
+    game_state *m_current_state = nullptr;
 public:
     game();
-    ~game();
+    ~game() { }
+
     void init(const char *title, int x, int y, int width, int height, bool fullscreen);
-    
+    void clean();
+
     void handle_events();
     void update();
     void render();
-    void clean();
 
-    bool running() { return is_running;  }
+    void change_state(game_state *state);
+
+    bool running() { return is_running; }
 
     static SDL_Renderer *renderer;
 

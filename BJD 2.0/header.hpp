@@ -2,14 +2,22 @@
 #ifndef HEADER_HPP
 #define HEADER_HPP
 
+/*
+In the previous edition of the project, everything was here. for a bit more structure, it is now split into separate header files and this is where we find the includes.
+*/
+
 #include <iostream>
 #include <random>
 #include <vector>
+#include <memory>
+#include <bitset>
+#include <array>
 #include <deque>
 #include <list>
 #include <algorithm>
 #include <string>
 #include <sstream>
+#include <stack>
 #include "SDL.h"
 #include "SDL_image.h"
 
@@ -18,6 +26,7 @@ using std::cout;
 using std::endl;
 using std::cin;
 using std::vector;
+using std::stack;
 using std::deque;
 using std::list;
 

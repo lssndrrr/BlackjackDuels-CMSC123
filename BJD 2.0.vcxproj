@@ -157,16 +157,23 @@
   <ItemGroup>
     <ClInclude Include="BJD 2.0\game.hpp" />
     <ClInclude Include="BJD 2.0\game_obj.hpp" />
+    <ClInclude Include="BJD 2.0\game_state.hpp" />
+    <ClInclude Include="BJD 2.0\game_state_interface.hpp" />
     <ClInclude Include="BJD 2.0\header.hpp" />
+    <ClInclude Include="BJD 2.0\menu_state.hpp" />
+    <ClInclude Include="BJD 2.0\singleton.hpp" />
     <ClInclude Include="BJD 2.0\textures.hpp" />
+    <ClInclude Include="BJD 2.0\uncopyable.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BJD 2.0\button.cpp" />
     <ClCompile Include="BJD 2.0\deck.cpp" />
     <ClCompile Include="BJD 2.0\game.cpp" />
     <ClCompile Include="BJD 2.0\game_obj.cpp" />
+    <ClCompile Include="BJD 2.0\game_state.cpp" />
     <ClCompile Include="BJD 2.0\main.cpp" />
     <ClCompile Include="BJD 2.0\mainGame.cpp" />
+    <ClCompile Include="BJD 2.0\menu_state.cpp" />
     <ClCompile Include="BJD 2.0\players.cpp" />
     <ClCompile Include="BJD 2.0\SDL.cpp" />
     <ClCompile Include="BJD 2.0\textures.cpp" />

@@ -9,6 +9,10 @@ SDL_Texture *texturizer::load_texture(const char *texture) {
 	return tex;
 }
 
+void texturizer::draw(SDL_Texture *texture, SDL_Rect src, SDL_Rect dest) {
+	SDL_RenderCopy(game::renderer, texture, &src, &dest);
+}
+
 // 
 //void game::updatePlayerNum() {
 //    int pos = current->position;

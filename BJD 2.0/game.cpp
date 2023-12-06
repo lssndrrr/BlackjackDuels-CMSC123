@@ -1,15 +1,14 @@
 #include "game.hpp"
 #include "textures.hpp"
 #include "game_obj.hpp"
+#include "menu_state.hpp"
+#include "game_state_interface.hpp"
 
-game_object *main_menu_background, *main_menu_death;
+
+// game_object *main_menu_background, *main_menu_death;
 SDL_Renderer *game::renderer = nullptr;
 
 game::game() {
-
-}
-
-game::~game() {
 
 }
 
@@ -43,10 +42,10 @@ void game::init(const char *title, int xpos, int ypos, int width, int height, bo
         this->is_running = false;
     }
 
+    menu_state *main_menu = new menu_state();
+    states.push(main_menu);
     
     // init textures
-    main_menu_background = new game_object("BJD 2.0/Textures/mainmenubg.png", 0, 0);
-    main_menu_death = new game_object("BJD 2.0/Textures/death.png", 0, 0);
 
     
     /*state = gameState::mainMenu;
@@ -88,40 +87,57 @@ void game::init(const char *title, int xpos, int ypos, int width, int height, bo
 }
 
 void game::handle_events() {
-    // creating an event
-    SDL_Event event;
-    SDL_PollEvent(&event);
-    switch(event.type) {
-    case SDL_QUIT:
-        this->is_running = false;
-        break;
-    default:
-        break;
-    }
+    states.top()->handle_input(*this);
+    //// creating an event
+    //SDL_Event event;
+    //SDL_PollEvent(&event);
+    //switch(event.type) {
+    //case SDL_QUIT:
+    //    this->is_running = false;
+    //    break;
+    //default:
+    //    break;
+    //}
 }
 
 void game::update() {
-    cnt++;
-    main_menu_background->update();
-    main_menu_death->update();
-    /*dest_rect.y = 1280 / 2;*/
+    states.top()->update(*this);
+
+    //cnt++;
+    //main_menu_background->update();
+    //main_menu_death->update();
+    ///*dest_rect.y = 1280 / 2;*/
 }
 
 void game::render() {
-    SDL_RenderClear(renderer);
+    states.top()->render(*this);
+    //SDL_RenderClear(renderer);
 
-    // this is where we would add stuff to render
-    main_menu_background->render();
-    main_menu_death->render();
+    //// this is where we would add stuff to render
+    //main_menu_background->render();
+    //main_menu_death->render();
 
-    SDL_RenderPresent(renderer);
+    //SDL_RenderPresent(renderer);
 }
 
 void game::clean() {
+    if(!states.empty()) {
+        states.pop();
+    }
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
     cout << "BJD cleaned ... " << endl;
+}
+
+void game::change_state(game_state_interface *state) {
+    if(!states.empty()) { 
+        states.top()->clean(); 
+        states.pop();
+    }
+
+    state->init();
+    states.push(state);
 }
 
 //void game::intWin(){

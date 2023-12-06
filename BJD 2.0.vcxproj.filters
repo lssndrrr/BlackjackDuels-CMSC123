@@ -36,6 +36,21 @@
     <ClInclude Include="BJD 2.0\game_obj.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BJD 2.0\game_state.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BJD 2.0\menu_state.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BJD 2.0\uncopyable.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BJD 2.0\singleton.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BJD 2.0\game_state_interface.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BJD 2.0\button.cpp">
@@ -66,6 +81,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BJD 2.0\game_obj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BJD 2.0\menu_state.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BJD 2.0\game_state.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,7 +11,7 @@
 #define SDL_MAIN_HANDLED
 #include "game.hpp"
 
-game *bjd = NULL;
+game *bjd = nullptr;
 
 int main(int argc, char *argv[]) {
 
