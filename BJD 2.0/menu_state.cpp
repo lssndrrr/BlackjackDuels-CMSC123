@@ -9,7 +9,14 @@ void menu_state::init() {
 	// init stuff, objects?
 	// textures?
 	main_menu_background = new game_object("BJD 2.0/Textures/mainmenubg.png", 0, 0);
+
+	if(main_menu_background)
+		cout << "MAIN_MENU_BG initialized ... " << endl;
+
 	main_menu_death = new game_object("BJD 2.0/Textures/death.png", 0, 0);
+	
+	if(main_menu_death)
+		cout << "MAIN_MENU_DEATH initialized ... " << endl;
 }
 
 void menu_state::clean() {

@@ -29,13 +29,16 @@ int main(int argc, char *argv[]) {
     //initialize
     bjd->init("BJD", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, false);
 
+    if(bjd->get_state() == nullptr)
+        bjd->init();
+
     while(bjd->running()) {
 
         frame_start = SDL_GetTicks();
-
         bjd->handle_events();
         bjd->update();
         bjd->render();
+        // bjd->clean();
 
         frame_time = SDL_GetTicks() - frame_start;
 

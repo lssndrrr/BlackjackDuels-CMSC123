@@ -2,11 +2,12 @@
 #include "textures.hpp"
 #include "game_obj.hpp"
 #include "menu_state.hpp"
-#include "game_state_interface.hpp"
+#include "game_state.hpp"
 
 
 // game_object *main_menu_background, *main_menu_death;
 SDL_Renderer *game::renderer = nullptr;
+menu_state *main_menu = new menu_state();
 
 game::game() {
 
@@ -37,13 +38,13 @@ void game::init(const char *title, int xpos, int ypos, int width, int height, bo
         }
 
         this->is_running = true;
+        this->states.push(main_menu);
     } else {
         // when SDL does not initialize correctly
         this->is_running = false;
     }
 
-    menu_state *main_menu = new menu_state();
-    states.push(main_menu);
+    
     
     // init textures
 
@@ -86,6 +87,11 @@ void game::init(const char *title, int xpos, int ypos, int width, int height, bo
     winner.setCharacterSize(100);*/
 }
 
+void game::init() {
+    m_current_state = states.top();
+    states.top()->init();
+}
+
 void game::handle_events() {
     states.top()->handle_input(*this);
     //// creating an event
@@ -121,6 +127,10 @@ void game::render() {
 }
 
 void game::clean() {
+    states.top()->clean();
+}
+
+void game::clean_all() {
     if(!states.empty()) {
         states.pop();
     }
@@ -130,7 +140,7 @@ void game::clean() {
     cout << "BJD cleaned ... " << endl;
 }
 
-void game::change_state(game_state_interface *state) {
+void game::change_state(game_state *state) {
     if(!states.empty()) { 
         states.top()->clean(); 
         states.pop();

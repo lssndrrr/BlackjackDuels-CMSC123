@@ -61,13 +61,16 @@ public:
     ~game() { }
 
     void init(const char *title, int x, int y, int width, int height, bool fullscreen);
-    void clean();
+    void clean_all();
 
+    void init();
     void handle_events();
     void update();
     void render();
+    void clean();
 
     void change_state(game_state *state);
+    game_state* get_state() { return m_current_state; }
 
     bool running() { return is_running; }
 
