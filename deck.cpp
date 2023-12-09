@@ -45,8 +45,9 @@ int deck::cardValue(rank rk){
     else if(rk == rank::ace)
         return 11;
     else
-        return (static_cast<int>(rk) + 1);
+        return (static_cast<int>(rk));
 }
+// az ! changed from return (static_cast<int>(rk) + 1);
 
 void deck::findOverallValue(){
     deque<card>::iterator current = cards.begin();
