@@ -110,6 +110,7 @@ public:
     player(int);
     int getPoints();
     string getUsername();
+    void setUsername(string);
     friend class playerList;
     friend class deck;
     friend class game;

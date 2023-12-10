@@ -25,6 +25,11 @@ string player::getUsername() {
     return this->username;
 }
 
+
+void player::setUsername(string input) {
+    this->username = input;
+}
+
 // NTS FOR LOOP / WHILE LOOP i = 0 i < numPlayers , player(i)
 
 // int will come from game file

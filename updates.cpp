@@ -624,5 +624,7 @@ void game::renderWinScreen() {
     window->draw(mainMenuBG);
     window->draw(winner);
     mainMenuButton.drawButton(*window);
+    window->draw(entername);
+    window->draw(username);
     window->display();
 }

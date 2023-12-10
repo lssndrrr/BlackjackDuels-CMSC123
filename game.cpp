@@ -238,7 +238,7 @@ player game::update(){
         cout << "Points: " << players.playerlist.front().points << endl;
 
         winner.setString(winText.str());
-        winner.setPosition((window->getSize().x / 2) - (winner.getGlobalBounds().width / 2), (window->getSize().y / 2) - (winner.getGlobalBounds().height + 100.f));
+        winner.setPosition((window->getSize().x / 2) - (winner.getGlobalBounds().width / 2), (window->getSize().y / 2) - (winner.getGlobalBounds().height + 200.f));
     }
     // else if(state == gameState::loseScreen) {
 

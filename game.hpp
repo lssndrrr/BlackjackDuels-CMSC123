@@ -240,7 +240,9 @@ class game{
     Text bustText;
     Text winner;
     Text loseText;
-    Text input;
+    Text entername;
+    Text username;
+    string input;
 
     // game logic variables
     int highestValue;
