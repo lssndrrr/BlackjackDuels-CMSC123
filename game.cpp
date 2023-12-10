@@ -237,7 +237,7 @@ player game::update(){
         winText << "PLAYER " << players.playerlist.front().position << " WINS!";
 
         winner.setString(winText.str());
-        winner.setPosition((window->getSize().x / 2) - (winner.getGlobalBounds().width / 2), (window->getSize().y / 2) - (winner.getGlobalBounds().height + 100.f));
+        winner.setPosition((window->getSize().x / 2) - (winner.getGlobalBounds().width / 2), (window->getSize().y / 2) - (winner.getGlobalBounds().height + 200.f));
     }
     // else if(state == gameState::loseScreen) {
 

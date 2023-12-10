@@ -252,7 +252,6 @@ void menu::insertWinner(player winner) {
         winners.push_back(winner);
     else {
         list<player>::iterator i = this->winners.begin();
-
         while(i != this->winners.end()) { //winners are arranged in descending order
             if(winner.getPoints() >= (*i).getPoints()) {
                 this->winners.insert(i,winner);
@@ -270,6 +269,8 @@ void menu::insertWinner(player winner) {
 void menu::displayWinners() {
     list<player>::iterator i = this->winners.begin();
     int pos = 1;
+
+    cout << "LEADERBOARD---------------" << endl;
 
     while(i != this->winners.end()) {
         cout << pos << ". " << (*i).getUsername() << " - " << (*i).getPoints() << " points" << endl;
