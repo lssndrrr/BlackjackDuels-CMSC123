@@ -503,9 +503,16 @@ void game::updateWinScreen(){
                 break;
 
             case Event::TextEntered:
-                // cout << static_cast<char>(this->event.text.unicode);
-                cout << (this->event.text.unicode);
+                if(this->event.text.unicode == '\b' && input.size() > 0)
+                    this->input.erase(input.end()-1);
+                else if(this->event.text.unicode != '\b')
+                    this->input += this->event.text.unicode;
+
+                players.playerlist.front().setUsername(input);
+                this->username.setString(this->input);
+                username.setPosition((window->getSize().x / 2) - (username.getGlobalBounds().width / 2), (window->getSize().y / 2) - (winner.getGlobalBounds().height - 15.f));
                 break;
+                
             default:
                 break;
         }
