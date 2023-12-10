@@ -99,6 +99,7 @@ void game::update(){
             gameDeck.dealCards(&players);
 
             while(current != players.playerlist.end()){
+                cout << "state: " << this->state << endl;
                 cout << "Player " << current->position << endl;
                 current->d.displayDeck();
                 current->d.findOverallValue();
@@ -153,6 +154,9 @@ void game::update(){
                     }
                 }
 
+                if(this->state == gameState::mainMenu)
+                    break;
+
                 if(!this->out) {
                     if(highestValue < current->d.overallValue && current->d.overallValue < 22)
                         highestValue = current->d.overallValue;
@@ -164,6 +168,9 @@ void game::update(){
                 }
                 this->stand = this->lose = this->out = false;
             }
+
+            if(this->state == gameState::mainMenu)
+                break;
 
             current = players.playerlist.begin();
             while(current != players.playerlist.end()){
@@ -197,6 +204,9 @@ void game::update(){
                     current = tmp;
                 }
             }
+
+            if(this->state == gameState::mainMenu)
+                break;
             
             cout << "Current standing:" << endl;
             players.displayPlayers();

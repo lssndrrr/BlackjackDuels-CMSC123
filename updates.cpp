@@ -543,8 +543,7 @@ void game::renderBust() {
             window->clear();
             window->draw(bustText);
             window->display();
-        }
-                                
+        }                    
     }
 
     window->clear();
