@@ -7,6 +7,10 @@ menu::menu() {
     this->intMenuVar();
 }
 
+menu::~menu() {
+    delete this->window;
+}
+
 void menu::intMenuTex() {
     Vector2f windowSize = Vector2f(window->getSize());
 
