@@ -12,8 +12,7 @@ game::game(RenderWindow*& window, View& view, VideoMode& video) {
 }
 
 game::~game(){
-    delete &players;
-    delete &defeated;
+   
 }
 
 void game::intVar(){

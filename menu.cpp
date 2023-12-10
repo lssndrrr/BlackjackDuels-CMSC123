@@ -2,8 +2,8 @@
 #include "header.hpp"
 
 menu::menu() {
-    this->intMenuTex();
     this->intMenuWin();
+    this->intMenuTex();
     this->intMenuVar();
 }
 
@@ -30,6 +30,9 @@ void menu::intMenuTex() {
     if(!Buttontexture.loadFromFile("Textures/button.png")){
         cout << "ERROR::Buttontexture" << endl;
     }
+    if(!Tutorialtexture.loadFromFile("Textures/tutorial.png")){
+        cout << "ERROR::Tutorial" << endl;
+    }
     if(!font.loadFromFile("Fonts/alagard.ttf")){
         cout << "ERROR::font" << endl;
     }
@@ -40,9 +43,15 @@ void menu::intMenuTex() {
     window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
     Title.setTexture(Titletexture);
     playButton.setButton("Play", Vector2f(175.0, 70.0), 50, &Buttontexture, Color::Black, &font);
+    tutorialButton.setButton("Learn", Vector2f(175.0, 70.0), 50, &Buttontexture, Color::Black, &font);
+    backButton.setButton("Back", Vector2f(175.0, 70.0), 50, &Buttontexture, Color::Black, &font);
+    Tutorial.setTexture(Tutorialtexture);
 
     //scaling texture
     mainMenuBG.setScale(windowSize.x / MMBGtexture.getSize().x, windowSize.y / MMBGtexture.getSize().y);
+    Death.setScale(2.0, 2.0);
+    Title.setScale(0.5, 0.5);
+    Tutorial.setScale(windowSize.x / Tutorialtexture.getSize().x, windowSize.y / Tutorialtexture.getSize().y);
 
     //position
     mainMenuBG.setPosition(0, 0);
