@@ -380,23 +380,26 @@ void game::updateGameEvent() {
         } else if (event.type == Event::MouseButtonPressed) {
             if (event.mouseButton.button == Mouse::Left) {
                 if(hitButton.isMouseOver(*window)) {
-                    if (current->d.overallValue < 22) {
+                    if(current->d.overallValue < 22) {
+                        restoreCards();
                         gameDeck.hitDeck(&(current->d));
                         current->d.findOverallValue();
                     } 
                     else {
-                        lose = true;
+                        this->lose = true;
                     }
                     cout << endl;
                     current->d.displayDeck();
                     cout << endl;
                     cout << "Overall value: " << current->d.overallValue << endl;
                     updateOverallValue();
+                    cout << "Deck size: " << gameDeck.size() << endl;
                 } 
                 else if(standButton.isMouseOver(*window)) {
                     cout << "Your current overall value is " << current->d.overallValue << "! Next player!" << endl;
                     cout << endl;
-                    stand = true;
+                    cout << "Deck size: " << gameDeck.size() << endl;
+                    this->stand = true;
                 }
                 else if(pauseButton.isMouseOver(*window)) {
                     this->paused = true;
@@ -460,7 +463,7 @@ void game::updatePauseScreen(){
 }
 
 void game::updateWinScreen(){
-    while (this->window->pollEvent(this->event)) {
+    while(this->window->pollEvent(this->event)) {
         switch (this->event.type){
             case Event::Closed:
                 window->close();
@@ -483,6 +486,22 @@ void game::updateWinScreen(){
                 window->setSize(Vector2u(viewWidth, viewHeight));
                 break;
 
+            case Event::MouseMoved:
+                if(mainMenuButton.isMouseOver(*window)){
+                    mainMenuButton.setTextColor(Color::Green);
+                } 
+                else {
+                    mainMenuButton.setTextColor(Color::Black);
+                }
+                break;
+
+            case Event::MouseButtonPressed:
+                if (this->event.mouseButton.button == Mouse::Left && mainMenuButton.isMouseOver(*window)){
+                    this->state = gameState::mainMenu;
+                    this->end = false;
+                }
+                break;
+
             default:
                 break;
         }
@@ -502,7 +521,6 @@ void game::renderChooseNum(){
     twoP.drawButton(*window);
     threeP.drawButton(*window);
     fourP.drawButton(*window);
-    // startButton.drawButton(*window);
     nextButton.drawButton(*window);
     window->draw(numHeader);
 }
@@ -520,9 +538,16 @@ void game::renderChooseChar(){
 }
 
 void game::renderBust() {
+    while(bust.getElapsedTime().asMilliseconds() < 1000) {
+        if(bust.getElapsedTime().asMilliseconds() > 500) {
+            window->clear();
+            window->draw(bustText);
+            window->display();
+        }
+                                
+    }
+
     window->clear();
-    window->draw(bustText);
-    window->display();
 }
 
 void game::renderPauseScreen() {
@@ -549,7 +574,6 @@ void game::renderMainGame(){
         window->draw(deaths[x]);
 
     int temp = current->health / 10;
-    // cout << "temp; " << temp << endl;
     for(int x = 0; x < temp; x++)
         window->draw(lives[x]);
 
@@ -582,4 +606,12 @@ void game::renderCard(const card& card, float posX, float posY){
     card.cardSprite->setPosition(posX, posY);
     card.cardSprite->setScale(1.8f, 1.8f);
     window->draw(*(card.cardSprite));
+}
+
+void game::renderWinScreen() {
+    window->clear();
+    window->draw(mainMenuBG);
+    window->draw(winner);
+    mainMenuButton.drawButton(*window);
+    window->display();
 }

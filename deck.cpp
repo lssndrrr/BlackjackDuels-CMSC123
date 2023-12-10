@@ -111,3 +111,7 @@ void deck::displayDeck(){
         i++;
     }
 }
+
+int deck::size() {
+    return cards.size();
+}

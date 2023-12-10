@@ -14,14 +14,13 @@ game::~game()
 void game::intVar(){
     this->state = gameState::mainMenu;
     this->numPlayers = 0;
-    this->lose = false;
-    this->stand = false;
+    this->lose = this->stand = false;
     this->i = 1;
     this->jackFlag = 0;
     this->jakeFlag = 0;
     this->jacksonFlag = 0;
     this->jadeFlag = 0;
-    this->paused = false;
+    this->paused = this->out = this->end = false;
 
     Vector2f heartSize = dead.getGlobalBounds().getSize();
     float initPos = jackSprite.getGlobalBounds().width + 125.f;
@@ -33,28 +32,6 @@ void game::intVar(){
         lives.push_back(life);
         lives[x].setPosition(initPos + ((heartSize.x + 10.f) * x), window->getSize().y - heartSize.y - 40.f);
     }
-
-    pauseText.setFont(font);
-    pauseText.setString("PAUSED");
-    pauseText.setFillColor(Color::Red);
-    pauseText.setCharacterSize(100);
-    pauseText.setPosition((window->getSize().x / 2) - (pauseText.getGlobalBounds().width / 2), (window->getSize().y / 2) - (pauseText.getGlobalBounds().height / 2 + 25.f));
-    
-    bustText.setFont(font);
-    bustText.setString("BUST!");
-    bustText.setFillColor(Color::Red);
-    bustText.setCharacterSize(100);
-    bustText.setPosition((window->getSize().x / 2) - (bustText.getGlobalBounds().width / 2), (window->getSize().y / 2) - (bustText.getGlobalBounds().height / 2));
-
-    loseText.setFont(font);
-    loseText.setString("BUST!");
-    loseText.setFillColor(Color::Red);
-    loseText.setCharacterSize(100);
-    loseText.setPosition((window->getSize().x / 2) - (bustText.getGlobalBounds().width / 2), (window->getSize().y / 2) - (bustText.getGlobalBounds().height / 2));
-
-    winner.setFont(font);
-    winner.setFillColor(Color::White);
-    winner.setCharacterSize(100);
 }
 
 void game::intWin(){
@@ -112,10 +89,13 @@ void game::update(){
             state = gameState::mainGameScreen;
     }
     else if (state == gameState::mainGameScreen){
-        while(players.playerlist.size() > 1){
+        while(players.size() > 1){
+            list<player>::iterator tmp;
             intCardSprites();
             current = players.playerlist.begin();
             highestValue = 0;
+            restoreCards();
+
             gameDeck.dealCards(&players);
 
             while(current != players.playerlist.end()){
@@ -134,9 +114,9 @@ void game::update(){
                     setDashboard();
                     updateGameEvent();
 
-                    if(this->paused) {
+                    if(this->paused) { 
                         this->state = gameState::pauseScreen;
-                        while(this->paused) {
+                        while(this->paused) { //loops the game in pause state as long as continue button isn't pressed
                             updatePauseScreen();
                             renderPauseScreen();
                         }
@@ -150,8 +130,7 @@ void game::update(){
                         current->flag = true;
 
                         bust.restart();
-                        while(bust.getElapsedTime().asMilliseconds() < 500)
-                            renderBust();
+                        renderBust();
                     }
 
                     if(lose){
@@ -159,18 +138,31 @@ void game::update(){
                             current->health = current->health - 10;
                         } 
                         else {
+                            tmp = std::next(current, 1);
                             players.transferPlayer(current, &defeated);
+                            this->out = true;
+
+                            if(players.size() <= 1) {
+                                this->state = gameState::winScreen;
+                                this->end = true;
+                                update();
+                                winLoop();
+                                break;
+                            }
                         }
                     }
                 }
 
-                stand = lose = false;
+                if(!this->out) {
+                    if(highestValue < current->d.overallValue && current->d.overallValue < 22)
+                        highestValue = current->d.overallValue;
 
-                if(highestValue < current->d.overallValue && current->d.overallValue < 22){
-                    highestValue = current->d.overallValue;
+                    current++;
                 }
-
-                current++;
+                else {
+                    current = tmp;
+                }
+                this->stand = this->lose = this->out = false;
             }
 
             current = players.playerlist.begin();
@@ -178,25 +170,54 @@ void game::update(){
                 if(highestValue > current->d.overallValue && current->flag != true){
                     if(current->health > 10){
                         current->health -= 10;
-                    } 
-                    else{
-                        players.transferPlayer(current, &defeated);
                     }
-                } else{
+                    else{
+                        tmp = std::next(current, 1);
+                        players.transferPlayer(current, &defeated);
+                        this->out = true;
+
+                        if(players.size() <= 1) {
+                            this->state = gameState::winScreen;
+                            this->end = true;
+                            update();
+                            winLoop();
+                            break;
+                        }
+                    }
+                } 
+                else {
                     current->flag = false;
                 }
-                current->d.cards.clear();
-                ++current;
+
+                if(!this->out) {
+                    current->d.cards.clear();
+                    ++current;
+                }
+                else {
+                    current = tmp;
+                }
             }
+            
             cout << "Current standing:" << endl;
             players.displayPlayers();
-            cout << endl;
+            cout << endl << endl <<  "Size: " << players.size() << endl << endl;
         }
         
-        if(players.playerlist.size() == 1)
-            state = gameState::winScreen;
-        else if(players.playerlist.size() == 0)
-            state = gameState::loseScreen;
+        if(players.playerlist.size() <= 1 && this->state != gameState::mainMenu) {
+            this->state = gameState::winScreen;
+            this->end = true;
+            update();
+            winLoop();
+        }
+        // else if(players.playerlist.size() == 0) {
+        //     this->state = gameState::winScreen;
+        //     this->end = true;
+
+        //     while(this->end) {
+        //         updateWinScreen();
+        //         renderWinScreen();
+        //     }
+        // }
 
         //if playerlist.getSize == 1 -> state = winScreen
         //if playerlist.getSize == 0 -> state = loseScreen
@@ -207,11 +228,26 @@ void game::update(){
         winText << "PLAYER " << players.playerlist.front().position << " WINS!";
 
         winner.setString(winText.str());
-        winner.setPosition((window->getSize().x / 2) - (bustText.getGlobalBounds().width / 2), (window->getSize().y / 2) - (bustText.getGlobalBounds().height / 2));
-        
+        winner.setPosition((window->getSize().x / 2) - (winner.getGlobalBounds().width / 2), (window->getSize().y / 2) - (winner.getGlobalBounds().height + 100.f));
     }
     else if(state == gameState::loseScreen) {
 
+    }
+}
+
+void game::winLoop() {
+    while(this->end) {
+        updateWinScreen();
+        renderWinScreen();
+    }
+}
+
+void game::restoreCards() {
+    if(gameDeck.size() < 10) {
+        gameDeck.gameDeck();
+        gameDeck.shuffle();
+        intCardSprites();
+        cout << "---Cards restored---" << endl;
     }
 }
 
@@ -219,7 +255,8 @@ void game::render(){
     this->window->clear();
     if (state == gameState::mainMenu) {
         renderMainMenu();
-    } else if(state == tutorialScreen){
+    } 
+    else if(state == tutorialScreen){
         window->draw(mainMenuBG);
         backButton.drawButton(*window);
         window->draw(Tutorial);
@@ -234,10 +271,10 @@ void game::render(){
         renderPauseScreen();
     }
     else if (state == gameState::winScreen) {
-        window->draw(winner);
+        renderWinScreen();
     }
     else if(state == gameState::loseScreen) {
-        window->draw(loseText);
+        renderWinScreen();
     }
 
     this->window->display();

@@ -42,6 +42,14 @@ int playerList::getPosition(player* p){
     return p->position;
 }
 
+int playerList::size() {
+    return playerlist.size();
+}
+
+// void playerList::erase(list<player>::iterator& current) {
+//     playerlist.erase(current);
+// }
+
 void playerList::displayPlayers(){
     list<player>::iterator p = playerlist.begin();
 

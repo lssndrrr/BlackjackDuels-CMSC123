@@ -212,6 +212,7 @@ class game{
     button hitButton;
     button standButton;
     button pauseButton;
+    button mainMenuButton;
 
     //Main game
     Texture mainGameBGTopTex;
@@ -250,7 +251,9 @@ class game{
     list<player>::iterator current;
     bool lose;
     bool stand;
+    bool out;
     bool paused;
+    bool end;
 
     int i, jackFlag, jakeFlag, jacksonFlag, jadeFlag;
     Clock candleTime, idle, bust;
@@ -284,6 +287,7 @@ public:
     void renderChooseChar();
     void renderMainGame();
     void renderPauseScreen();
+    void renderWinScreen();
 
     // main game render
     void renderButtons();
@@ -294,6 +298,8 @@ public:
     void updateOverallValue();
     void updatePlayerNum();
     void renderBust();
+    void winLoop();
+    void restoreCards();
     
     // game logic
     void runRound();

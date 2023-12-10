@@ -416,6 +416,7 @@ void game::intTex(){
     hitButton.setButton("Hit", Vector2f(175.0, 70.0), 50, &Buttontexture, Color::Black, &font);
     standButton.setButton("Stand", Vector2f(175.0, 70.0), 50, &Buttontexture, Color::Black, &font);
     pauseButton.setButton("||", Vector2f(70.0, 70.0), 40, &Buttontexture, Color::Black, &font);
+    mainMenuButton.setButton("Main Menu", Vector2f(250.0, 70.0), 35, &Buttontexture, Color::Black, &font);
     life.setTexture(lifeTex);
     dead.setTexture(deadTex);
 
@@ -500,7 +501,6 @@ void game::intTex(){
     jakeSprite.setTexture(jakeTex);
     jacksonSprite.setTexture(jacksonTex);
     jadeSprite.setTexture(jadeTex);
-
 
     tutorialButton.setButton("Learn", Vector2f(175.0, 70.0), 50, &Buttontexture, Color::Black, &font);
     backButton.setButton("Back", Vector2f(175.0, 70.0), 50, &Buttontexture, Color::Black, &font);
@@ -671,4 +671,37 @@ void game::intTex(){
     float pausetextPosX = positionpausebtn.x + (pausebtnSize.x / 2.f) - (pauseButton.text.getLocalBounds().width / 1.5f);
     float pausetextPosY = positionpausebtn.y + (pausebtnSize.y / 2.f) - (pauseButton.text.getLocalBounds().height / 2.f + 15.f);
     pauseButton.text.setPosition(pausetextPosX, pausetextPosY);
+
+    Vector2f MMbtnSize = mainMenuButton.btn.getLocalBounds().getSize();
+    Vector2f positionMMbtn((windowSize.x - MMbtnSize.x) / 2, (windowSize.y - MMbtnSize.y) / 2 + 110.5f);
+    mainMenuButton.setPosition(positionMMbtn);
+    
+    float MMtextPosX = positionMMbtn.x + (MMbtnSize.x / 2.f) - (mainMenuButton.text.getLocalBounds().width / 2.F);
+    float MMtextPosY = positionMMbtn.y + (MMbtnSize.y / 2.f) - (mainMenuButton.text.getLocalBounds().height / 2.f + 15.f);
+    mainMenuButton.text.setPosition(MMtextPosX, MMtextPosY);
+
+    //Texts
+    pauseText.setFont(font);
+    pauseText.setString("PAUSED");
+    pauseText.setFillColor(Color::Red);
+    pauseText.setCharacterSize(100);
+    pauseText.setPosition((window->getSize().x / 2) - (pauseText.getGlobalBounds().width / 2), (window->getSize().y / 2) - (pauseText.getGlobalBounds().height / 2 + 25.f));
+    
+    bustText.setFont(font);
+    bustText.setString("BUST!");
+    bustText.setFillColor(Color::Red);
+    bustText.setCharacterSize(100);
+    bustText.setPosition((window->getSize().x / 2) - (bustText.getGlobalBounds().width / 2), (window->getSize().y / 2) - (bustText.getGlobalBounds().height / 2));
+
+    loseText.setFont(font);
+    loseText.setString("BUST!");
+    loseText.setFillColor(Color::Red);
+    loseText.setCharacterSize(100);
+    loseText.setPosition((window->getSize().x / 2) - (bustText.getGlobalBounds().width / 2), (window->getSize().y / 2) - (bustText.getGlobalBounds().height / 2));
+
+    winner.setFont(font);
+    // winner.setString("CONGRATS!");
+    winner.setFillColor(Color::White);
+    winner.setCharacterSize(100);
+    // winner.setPosition((window->getSize().x / 2) - (winner.getGlobalBounds().width / 2), (window->getSize().y / 2) - (winner.getGlobalBounds().height / 2 + 25.f));
 }

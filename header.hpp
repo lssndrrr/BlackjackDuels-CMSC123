@@ -73,6 +73,7 @@ public:
     string getSuit(suit);
     string getRank(rank);
     void displayDeck();
+    int size();
     friend class game;
 };
 
@@ -96,7 +97,7 @@ class character {
 // player
 class player{
     int health, mana, position;
-    bool flag;
+    bool flag = false;
     deck d;
     character c;
 public:
@@ -110,12 +111,15 @@ public:
 class playerList{
     list<player> playerlist;
 public:
+    // list<player> playerlist;
     playerList(); 
     void addPlayers(int);
     void transferPlayer(const list<player>::iterator&, playerList*);
     int getHealth(player*);
     int getMana(player*);
     int getPosition(player*);
+    int size();
+    // void erase(list<player>::iterator&);
     void displayPlayers();
     friend class game;
     friend class deck;
