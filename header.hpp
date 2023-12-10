@@ -125,13 +125,30 @@ public:
     friend class deck;
 };
 
+//Main Menu classes
+
+enum menuState{
+    mainMenu,
+    tutorialScreen,
+    leaderboard
+};
+
 class menu {
+    //window
+    RenderWindow *window;
+    View view;
+    Event event;
+    VideoMode video;
+    float aspectRatio, viewHeight, viewWidth;
+    menuState menuState;
+
     //textures
     Texture MMBGtexture;
     Texture Deathtexture;
     Texture Titletexture;
     Texture Buttontexture;
     Texture Tutorialtexture;
+    Image icon;
 
     //sprites
     Sprite Death;
@@ -143,9 +160,10 @@ class menu {
     //buttons
     button playButton;
     button tutorialButton;
+    button backButton;
 
     //game
-    game g;
+    game *g;
 
 public:
     menu();
@@ -159,6 +177,7 @@ public:
     void run();
     void update();
     void render();
+    void createGame();
 };
 
 #endif

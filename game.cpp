@@ -50,7 +50,7 @@ const bool game::running() const{
 }
 
 void game::run(){
-    while (running()){
+    while (running()) {
         update();
         render();
     }
