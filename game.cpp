@@ -11,10 +11,6 @@ game::game(RenderWindow*& window, View& view, VideoMode& video) {
     this->intVar();
 }
 
-game::~game(){
-   
-}
-
 void game::intVar(){
     this->state = gameState::chooseNumPlayersScreen;
     this->numPlayers = 0;
@@ -50,22 +46,21 @@ const bool game::running() const{
     return this->open;
 }
 
-void game::run(){
+player game::run(){
+    player winner;
+
     while (running()) {
-        update();
+        winner = update();
         render();
     }
+
+    return winner;
 }
 
 
-void game::update(){
-    // if (state == gameState::mainMenu) {
-    //     updateMainMenu();
-    // }
-    // else if(state == tutorialScreen){
-    //     updateTutorial();
-    // }
-    // else 
+player game::update(){
+    player tmp; //for return purposes only, para walang error na lumabas
+
     if (state == gameState::chooseNumPlayersScreen) {
         updateChooseNumPlayers();
     }
@@ -151,7 +146,7 @@ void game::update(){
                                 this->end = true;
                                 update();
                                 winLoop();
-                                return;
+                                return players.playerlist.front();
                             }
                         }
                     }
@@ -191,7 +186,7 @@ void game::update(){
                             this->end = true;
                             update();
                             winLoop();
-                            return;
+                            return players.playerlist.front();
                         }
                     }
                 } 
@@ -221,7 +216,7 @@ void game::update(){
             this->end = true;
             update();
             winLoop();
-            return;
+            return players.playerlist.front();
         }
         // else if(players.playerlist.size() == 0) {
         //     this->state = gameState::winScreen;
@@ -247,6 +242,8 @@ void game::update(){
     // else if(state == gameState::loseScreen) {
 
     // }
+
+    return tmp;
 }
 
 void game::winLoop() {

@@ -4,11 +4,25 @@ playerList::playerList(){
     // nada;
 }
 
+player::player() {
+
+}
+
 player::player(int pos){
-    health = 100;
-    mana = 10;
-    position = pos;
-    flag = true;
+    this->health = 100;
+    this->mana = 10;
+    this->position = pos;
+    this->flag = true;
+    this->points = 0;
+    this->username = "";
+}
+
+int player::getPoints() {
+    return this->points;
+}
+
+string player::getUsername() {
+    return this->username;
 }
 
 // NTS FOR LOOP / WHILE LOOP i = 0 i < numPlayers , player(i)

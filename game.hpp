@@ -267,11 +267,10 @@ class game{
 public:
     game();
     game(RenderWindow*&, View&, VideoMode&);
-    ~game();
     const bool running() const;
     void updateMouse();
-    void run();// int for number of players
-    void update();
+    player run();// int for number of players
+    player update();
     void render();
 
     // updates
@@ -353,6 +352,9 @@ class menu {
     //game
     game *g;
 
+    //leaderboard
+    list<player> winners;
+
 public:
     menu();
     ~menu();
@@ -366,6 +368,8 @@ public:
     void update();
     void render();
     void createGame();
+    void insertWinner(player);
+    void displayWinners();
 };
 
 #endif

@@ -96,13 +96,17 @@ class character {
 
 // player
 class player{
-    int health, mana, position;
+    int health, mana, position, points;
     bool flag = false;
     deck d;
     character c;
+    string username;
 public:
     player *prev, *next;
+    player();
     player(int);
+    int getPoints();
+    string getUsername();
     friend class playerList;
     friend class deck;
     friend class game;

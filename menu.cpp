@@ -242,5 +242,37 @@ void menu::render() {
 
 void menu::createGame() {
     this->g = new game(this->window, this->view, this->video);
-    g->run();
+    player winner = g->run();
+
+    insertWinner(winner);
+}
+
+void menu::insertWinner(player winner) {
+    if(this->winners.empty())
+        winners.push_back(winner);
+    else {
+        list<player>::iterator i = this->winners.begin();
+
+        while(i != this->winners.end()) { //winners are arranged in descending order
+            if(winner.getPoints() >= (*i).getPoints()) {
+                this->winners.insert(i,winner);
+                return;
+            }
+            i++;
+        }
+
+        this->winners.push_back(winner);
+    }
+
+    displayWinners();
+}
+
+void menu::displayWinners() {
+    list<player>::iterator i = this->winners.begin();
+    int pos = 1;
+
+    while(i != this->winners.end()) {
+        cout << pos << ". " << (*i).getUsername() << " - " << (*i).getPoints() << " points" << endl;
+        i++;
+    }
 }
