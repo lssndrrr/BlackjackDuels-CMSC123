@@ -8,17 +8,10 @@
 #include "textures.cpp"
 #include "updates.cpp"
 #include "header.hpp"
+#include "menu.cpp"
 
 int main(){
-    RenderWindow *window;
-    View view;
-    VideoMode video;
-
-    initWindow(window, view, video);
-    menu();
- 
-    game g(window, view, video);
-    g.run();
-
+    menu m;
+    m.run();
     return 0;
 }

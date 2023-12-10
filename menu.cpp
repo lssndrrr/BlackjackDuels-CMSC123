@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include "header.hpp"
 
 menu::menu() {
     this->intMenuTex();

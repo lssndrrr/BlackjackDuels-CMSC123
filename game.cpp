@@ -16,7 +16,7 @@ game::~game(){
 }
 
 void game::intVar(){
-    this->state = gameState::mainMenu;
+    this->state = gameState::chooseNumPlayersScreen;
     this->numPlayers = 0;
     this->lose = this->stand = false;
     this->i = 1;
@@ -25,6 +25,7 @@ void game::intVar(){
     this->jacksonFlag = 0;
     this->jadeFlag = 0;
     this->paused = this->out = this->end = false;
+    this->open = true;
 
     Vector2f heartSize = dead.getGlobalBounds().getSize();
     float initPos = jackSprite.getGlobalBounds().width + 125.f;
@@ -46,7 +47,7 @@ void game::intWin(RenderWindow*& window, View& view, VideoMode& video){
 }
 
 const bool game::running() const{
-    return this->window->isOpen() && this->end;
+    return this->open;
 }
 
 void game::run(){
@@ -58,13 +59,14 @@ void game::run(){
 
 
 void game::update(){
-    if (state == gameState::mainMenu) {
-        updateMainMenu();
-    }
-    else if(state == tutorialScreen){
-        updateTutorial();
-    }
-    else if (state == gameState::chooseNumPlayersScreen) {
+    // if (state == gameState::mainMenu) {
+    //     updateMainMenu();
+    // }
+    // else if(state == tutorialScreen){
+    //     updateTutorial();
+    // }
+    // else 
+    if (state == gameState::chooseNumPlayersScreen) {
         updateChooseNumPlayers();
     }
     else if(state == gameState::chooseCharScreen) {
@@ -149,14 +151,14 @@ void game::update(){
                                 this->end = true;
                                 update();
                                 winLoop();
-                                break;
+                                return;
                             }
                         }
                     }
                 }
 
-                if(this->state == gameState::mainMenu)
-                    break;
+                // if(this->state == gameState::mainMenu)
+                //     break;
 
                 if(!this->out) {
                     if(highestValue < current->d.overallValue && current->d.overallValue < 22)
@@ -170,8 +172,8 @@ void game::update(){
                 this->stand = this->lose = this->out = false;
             }
 
-            if(this->state == gameState::mainMenu)
-                break;
+            // if(this->state == gameState::mainMenu)
+            //     break;
 
             current = players.playerlist.begin();
             while(current != players.playerlist.end()){
@@ -189,7 +191,7 @@ void game::update(){
                             this->end = true;
                             update();
                             winLoop();
-                            break;
+                            return;
                         }
                     }
                 } 
@@ -206,19 +208,20 @@ void game::update(){
                 }
             }
 
-            if(this->state == gameState::mainMenu)
-                break;
+            // if(this->state == gameState::mainMenu)
+            //     break;
             
             cout << "Current standing:" << endl;
             players.displayPlayers();
             cout << endl << endl <<  "Size: " << players.size() << endl << endl;
         }
         
-        if(players.playerlist.size() <= 1 && this->state != gameState::mainMenu) {
+        if(players.playerlist.size() <= 1) {
             this->state = gameState::winScreen;
             this->end = true;
             update();
             winLoop();
+            return;
         }
         // else if(players.playerlist.size() == 0) {
         //     this->state = gameState::winScreen;
@@ -241,9 +244,9 @@ void game::update(){
         winner.setString(winText.str());
         winner.setPosition((window->getSize().x / 2) - (winner.getGlobalBounds().width / 2), (window->getSize().y / 2) - (winner.getGlobalBounds().height + 100.f));
     }
-    else if(state == gameState::loseScreen) {
+    // else if(state == gameState::loseScreen) {
 
-    }
+    // }
 }
 
 void game::winLoop() {
@@ -253,6 +256,7 @@ void game::winLoop() {
     }
 
     this->end = true;
+    this->open = false;
 }
 
 void game::restoreCards() {
@@ -266,15 +270,18 @@ void game::restoreCards() {
 
 void game::render(){
     this->window->clear();
-    if (state == gameState::mainMenu) {
-        renderMainMenu();
-    } 
-    else if(state == tutorialScreen){
-        window->draw(mainMenuBG);
-        backButton.drawButton(*window);
-        window->draw(Tutorial);
-    }
-    else if (state == gameState::chooseNumPlayersScreen) {
+
+    // if (state == gameState::mainMenu) {
+    //     renderMainMenu();
+    // } 
+    // else if(state == tutorialScreen){
+    //     window->draw(mainMenuBG);
+    //     backButton.drawButton(*window);
+    //     window->draw(Tutorial);
+    // }
+    // else
+
+    if (state == gameState::chooseNumPlayersScreen) {
         renderChooseNum();
     }
     else if(state == gameState::chooseCharScreen) {

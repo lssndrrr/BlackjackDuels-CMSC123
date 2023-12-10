@@ -3,8 +3,6 @@
 
 #include "header.hpp"
 
-void initWindow(RenderWindow*&, View&, VideoMode&);
-
 class button{
     public:
         RectangleShape btn;
@@ -30,8 +28,8 @@ class dashboard {
 };
 
 enum gameState{
-    mainMenu,
-    tutorialScreen,
+    // mainMenu,
+    // tutorialScreen,
     chooseNumPlayersScreen,
     chooseCharScreen,
     mainGameScreen,
@@ -256,6 +254,7 @@ class game{
     bool out;
     bool paused;
     bool end;
+    bool open;
 
     int i, jackFlag, jakeFlag, jacksonFlag, jadeFlag;
     Clock candleTime, idle, bust;
@@ -313,6 +312,60 @@ public:
     //void initRound();
 };
 
-// round
+// main menu classes
+//Main Menu classes
+
+enum menuState{
+    mainMenu,
+    tutorialScreen,
+    leaderboard
+};
+
+class menu {
+    //window
+    RenderWindow *window;
+    View view;
+    Event event;
+    VideoMode video;
+    float aspectRatio, viewHeight, viewWidth;
+    menuState menuState;
+
+    //textures
+    Texture MMBGtexture;
+    Texture Deathtexture;
+    Texture Titletexture;
+    Texture Buttontexture;
+    Texture Tutorialtexture;
+    Image icon;
+
+    //sprites
+    Sprite Death;
+    Sprite mainMenuBG;
+    Sprite Title;
+    Sprite Tutorial;
+    Font font;
+
+    //buttons
+    button playButton;
+    button tutorialButton;
+    button backButton;
+
+    //game
+    game *g;
+
+public:
+    menu();
+    ~menu();
+    
+    //initialize
+    void intMenuTex();
+    void intMenuWin();
+    void intMenuVar();
+    const bool running() const;
+    void run();
+    void update();
+    void render();
+    void createGame();
+};
 
 #endif

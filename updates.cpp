@@ -1,103 +1,102 @@
 #include "game.hpp"
 
-
 void game::updateMouse(){
     this->mousePosW = Mouse::getPosition(*this->window);
     this->mousePosV = this->window->mapPixelToCoords((this->mousePosW));
 }
 
-void game::updateMainMenu(){
-    while (this->window->pollEvent(this->event)) {
-        switch (this->event.type){
-            case Event::Closed:
-                window->close();
-                break;
-            case Event::KeyPressed:
-                if(this->event.key.code == Keyboard::Escape)
-                    window->close();
-                break;
-            case Event::Resized:
-                aspectRatio = static_cast<float>(event.size.width) / event.size.height;
-                viewWidth, viewHeight;
-                if(aspectRatio > 16.f / 9.f){
-                    viewHeight = static_cast<float>(event.size.height);
-                    viewWidth = viewHeight * (16.f / 9.f);
-                } else{
-                    viewWidth = static_cast<float>(event.size.width);
-                    viewHeight = viewWidth / (16.f / 9.f);
-                }
-                this->view.setSize(viewWidth, viewHeight);
-                window->setSize(Vector2u(viewWidth, viewHeight));
-                break;
-            case Event::MouseMoved:
-                if (playButton.isMouseOver(*window)){
-                    playButton.setTextColor(Color::Green);
-                } else {
-                    playButton.setTextColor(Color::Black);
-                }
-                if (tutorialButton.isMouseOver(*window)){
-                    tutorialButton.setTextColor(Color::Green);
-                } else {
-                    tutorialButton.setTextColor(Color::Black);
-                }
-                break;
+// void game::updateMainMenu(){
+//     while (this->window->pollEvent(this->event)) {
+//         switch (this->event.type){
+//             case Event::Closed:
+//                 window->close();
+//                 break;
+//             case Event::KeyPressed:
+//                 if(this->event.key.code == Keyboard::Escape)
+//                     window->close();
+//                 break;
+//             case Event::Resized:
+//                 aspectRatio = static_cast<float>(event.size.width) / event.size.height;
+//                 viewWidth, viewHeight;
+//                 if(aspectRatio > 16.f / 9.f){
+//                     viewHeight = static_cast<float>(event.size.height);
+//                     viewWidth = viewHeight * (16.f / 9.f);
+//                 } else{
+//                     viewWidth = static_cast<float>(event.size.width);
+//                     viewHeight = viewWidth / (16.f / 9.f);
+//                 }
+//                 this->view.setSize(viewWidth, viewHeight);
+//                 window->setSize(Vector2u(viewWidth, viewHeight));
+//                 break;
+//             case Event::MouseMoved:
+//                 if (playButton.isMouseOver(*window)){
+//                     playButton.setTextColor(Color::Green);
+//                 } else {
+//                     playButton.setTextColor(Color::Black);
+//                 }
+//                 if (tutorialButton.isMouseOver(*window)){
+//                     tutorialButton.setTextColor(Color::Green);
+//                 } else {
+//                     tutorialButton.setTextColor(Color::Black);
+//                 }
+//                 break;
 
-            case Event::MouseButtonPressed:
-                if (this->event.mouseButton.button == Mouse::Left && playButton.isMouseOver(*window)){
-                    state = chooseNumPlayersScreen;
-                } else if(this->event.mouseButton.button == Mouse::Left && tutorialButton.isMouseOver(*window)){
-                    state = tutorialScreen;
-                }
-                break;
+//             case Event::MouseButtonPressed:
+//                 if (this->event.mouseButton.button == Mouse::Left && playButton.isMouseOver(*window)){
+//                     state = chooseNumPlayersScreen;
+//                 } else if(this->event.mouseButton.button == Mouse::Left && tutorialButton.isMouseOver(*window)){
+//                     state = gametutorialScreen;
+//                 }
+//                 break;
 
-            default:
-                break;
-        }
-    }
-}
+//             default:
+//                 break;
+//         }
+//     }
+// }
 
-void game::updateTutorial(){
-    while (this->window->pollEvent(this->event)) {
-        switch (this->event.type){
-            case Event::Closed:
-                window->close();
-                break;
-            case Event::KeyPressed:
-                if(this->event.key.code == Keyboard::Escape)
-                    window->close();
-                break;
-            case Event::Resized:
-                aspectRatio = static_cast<float>(event.size.width) / event.size.height;
-                viewWidth, viewHeight;
-                if(aspectRatio > 16.f / 9.f){
-                    viewHeight = static_cast<float>(event.size.height);
-                    viewWidth = viewHeight * (16.f / 9.f);
-                } else{
-                    viewWidth = static_cast<float>(event.size.width);
-                    viewHeight = viewWidth / (16.f / 9.f);
-                }
-                this->view.setSize(viewWidth, viewHeight);
-                window->setSize(Vector2u(viewWidth, viewHeight));
-                break;
-            case Event::MouseMoved:
-                if (backButton.isMouseOver(*window)){
-                    backButton.setTextColor(Color::Green);
-                } else {
-                    backButton.setTextColor(Color::Black);
-                }
-                break;
+// void game::updateTutorial(){
+//     while (this->window->pollEvent(this->event)) {
+//         switch (this->event.type){
+//             case Event::Closed:
+//                 window->close();
+//                 break;
+//             case Event::KeyPressed:
+//                 if(this->event.key.code == Keyboard::Escape)
+//                     window->close();
+//                 break;
+//             case Event::Resized:
+//                 aspectRatio = static_cast<float>(event.size.width) / event.size.height;
+//                 viewWidth, viewHeight;
+//                 if(aspectRatio > 16.f / 9.f){
+//                     viewHeight = static_cast<float>(event.size.height);
+//                     viewWidth = viewHeight * (16.f / 9.f);
+//                 } else{
+//                     viewWidth = static_cast<float>(event.size.width);
+//                     viewHeight = viewWidth / (16.f / 9.f);
+//                 }
+//                 this->view.setSize(viewWidth, viewHeight);
+//                 window->setSize(Vector2u(viewWidth, viewHeight));
+//                 break;
+//             case Event::MouseMoved:
+//                 if (backButton.isMouseOver(*window)){
+//                     backButton.setTextColor(Color::Green);
+//                 } else {
+//                     backButton.setTextColor(Color::Black);
+//                 }
+//                 break;
 
-            case Event::MouseButtonPressed:
-                if (this->event.mouseButton.button == Mouse::Left && backButton.isMouseOver(*window)){
-                    state = mainMenu;
-                }
-                break;
+//             case Event::MouseButtonPressed:
+//                 if (this->event.mouseButton.button == Mouse::Left && backButton.isMouseOver(*window)){
+//                     state = mainMenu;
+//                 }
+//                 break;
 
-            default:
-                break;
-        }
-    }
-}
+//             default:
+//                 break;
+//         }
+//     }
+// }
 
 void game::updateChooseNumPlayers() {
     while (this->window->pollEvent(this->event)) {
@@ -497,7 +496,7 @@ void game::updateWinScreen(){
 
             case Event::MouseButtonPressed:
                 if (this->event.mouseButton.button == Mouse::Left && mainMenuButton.isMouseOver(*window)){
-                    this->state = gameState::mainMenu;
+                    this->open = false;
                     this->end = false;
                 }
                 break;
@@ -508,13 +507,13 @@ void game::updateWinScreen(){
     }
 }
 
-void game::renderMainMenu(){
-    window->draw(mainMenuBG);
-    window->draw(Death);
-    window->draw(Title);
-    playButton.drawButton(*window);
-    tutorialButton.drawButton(*window);
-}
+// void game::renderMainMenu(){
+//     window->draw(mainMenuBG);
+//     window->draw(Death);
+//     window->draw(Title);
+//     playButton.drawButton(*window);
+//     tutorialButton.drawButton(*window);
+// }
 
 void game::renderChooseNum(){
     window->draw(mainMenuBG);
