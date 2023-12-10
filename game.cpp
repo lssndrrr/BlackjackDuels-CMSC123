@@ -1,13 +1,17 @@
 #include "game.hpp"
 
 game::game(){
-    this->intWin();
     this->intTex();
     this->intVar(); 
 }
 
-game::~game()
-{
+game::game(RenderWindow*& window, View& view, VideoMode& video) {
+    this->intWin(window, view, video);
+    this->intTex();
+    this->intVar();
+}
+
+game::~game(){
     delete window;
 }
 
@@ -34,18 +38,15 @@ void game::intVar(){
     }
 }
 
-void game::intWin(){
-    this->window = NULL;
-
-    this->video.height = 720;
-    this->video.width = 1280;
-    this->window = new RenderWindow(this->video, "Blackjack Duels!", Style::Default);
-    this->view = View(FloatRect(0.f, 0.f, 1280.f, 720.f));
+void game::intWin(RenderWindow*& window, View& view, VideoMode& video){
+    this->video = video;
+    this->window = window;
+    this->view = view;
     this->window->setVerticalSyncEnabled(false);
 }
 
 const bool game::running() const{
-    return this->window->isOpen();
+    return this->window->isOpen() && this->end;
 }
 
 void game::run(){
@@ -250,6 +251,8 @@ void game::winLoop() {
         updateWinScreen();
         renderWinScreen();
     }
+
+    this->end = true;
 }
 
 void game::restoreCards() {

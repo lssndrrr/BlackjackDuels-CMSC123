@@ -125,4 +125,40 @@ public:
     friend class deck;
 };
 
+class menu {
+    //textures
+    Texture MMBGtexture;
+    Texture Deathtexture;
+    Texture Titletexture;
+    Texture Buttontexture;
+    Texture Tutorialtexture;
+
+    //sprites
+    Sprite Death;
+    Sprite mainMenuBG;
+    Sprite Title;
+    Sprite Tutorial;
+    Font font;
+
+    //buttons
+    button playButton;
+    button tutorialButton;
+
+    //game
+    game g;
+
+public:
+    menu();
+    ~menu();
+    
+    //initialize
+    void intMenuTex();
+    void intMenuWin();
+    void intMenuVar();
+    const bool running() const;
+    void run();
+    void update();
+    void render();
+};
+
 #endif

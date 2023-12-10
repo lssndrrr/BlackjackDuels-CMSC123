@@ -10,7 +10,14 @@
 #include "header.hpp"
 
 int main(){
-    game g;
+    RenderWindow *window;
+    View view;
+    VideoMode video;
+
+    initWindow(window, view, video);
+    menu();
+ 
+    game g(window, view, video);
     g.run();
 
     return 0;

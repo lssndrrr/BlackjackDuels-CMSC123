@@ -3,6 +3,8 @@
 
 #include "header.hpp"
 
+void initWindow(RenderWindow*&, View&, VideoMode&);
+
 class button{
     public:
         RectangleShape btn;
@@ -261,10 +263,11 @@ class game{
     // init funcs
     void intVar();
     void intTex();
-    void intWin();
+    void intWin(RenderWindow*&, View&, VideoMode&);
 
 public:
     game();
+    game(RenderWindow*&, View&, VideoMode&);
     ~game();
     const bool running() const;
     void updateMouse();
