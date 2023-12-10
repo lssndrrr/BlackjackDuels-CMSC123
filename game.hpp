@@ -353,7 +353,7 @@ class menu {
     game *g;
 
     //leaderboard
-    list<player> winners;
+    Leaderboard winners;
 
 public:
     menu();
@@ -368,8 +368,8 @@ public:
     void update();
     void render();
     void createGame();
-    void insertWinner(player);
-    void displayWinners();
+    // void insertWinner(player);
+    // void displayWinners();
 };
 
 #endif

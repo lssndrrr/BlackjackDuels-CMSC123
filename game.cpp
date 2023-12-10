@@ -235,6 +235,7 @@ player game::update(){
         std::stringstream winText;
 
         winText << "PLAYER " << players.playerlist.front().position << " WINS!";
+        cout << "Points: " << players.playerlist.front().points << endl;
 
         winner.setString(winText.str());
         winner.setPosition((window->getSize().x / 2) - (winner.getGlobalBounds().width / 2), (window->getSize().y / 2) - (winner.getGlobalBounds().height + 100.f));

@@ -399,6 +399,7 @@ void game::updateGameEvent() {
                     cout << endl;
                     cout << "Deck size: " << gameDeck.size() << endl;
                     this->stand = true;
+                    current->points += current->d.overallValue;
                 }
                 else if(pauseButton.isMouseOver(*window)) {
                     this->paused = true;
@@ -501,6 +502,10 @@ void game::updateWinScreen(){
                 }
                 break;
 
+            case Event::TextEntered:
+                // cout << static_cast<char>(this->event.text.unicode);
+                cout << (this->event.text.unicode);
+                break;
             default:
                 break;
         }
