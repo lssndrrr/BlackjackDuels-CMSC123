@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include <SFML/System/String.hpp>
 
 void game::updateMouse(){
     this->mousePosW = Mouse::getPosition(*this->window);
