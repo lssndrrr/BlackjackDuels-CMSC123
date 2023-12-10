@@ -82,6 +82,7 @@ void menu::intMenuTex() {
 }
 
 void menu::intMenuWin() {
+    this->window = NULL;
     video.height = 720;
     video.width = 1280;
     window = new RenderWindow(video, "Blackjack Duels!", Style::Default);
