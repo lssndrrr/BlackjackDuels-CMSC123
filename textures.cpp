@@ -673,7 +673,7 @@ void game::intTex(){
     pauseButton.text.setPosition(pausetextPosX, pausetextPosY);
 
     Vector2f MMbtnSize = mainMenuButton.btn.getLocalBounds().getSize();
-    Vector2f positionMMbtn((windowSize.x - MMbtnSize.x) / 2, (windowSize.y - MMbtnSize.y) / 2 + 110.5f);
+    Vector2f positionMMbtn((windowSize.x - MMbtnSize.x) / 2, (windowSize.y - MMbtnSize.y) / 2 + 200.f);
     mainMenuButton.setPosition(positionMMbtn);
     
     float MMtextPosX = positionMMbtn.x + (MMbtnSize.x / 2.f) - (mainMenuButton.text.getLocalBounds().width / 2.F);
@@ -700,8 +700,18 @@ void game::intTex(){
     loseText.setPosition((window->getSize().x / 2) - (bustText.getGlobalBounds().width / 2), (window->getSize().y / 2) - (bustText.getGlobalBounds().height / 2));
 
     winner.setFont(font);
-    // winner.setString("CONGRATS!");
     winner.setFillColor(Color::White);
     winner.setCharacterSize(100);
-    // winner.setPosition((window->getSize().x / 2) - (winner.getGlobalBounds().width / 2), (window->getSize().y / 2) - (winner.getGlobalBounds().height / 2 + 25.f));
+
+    enterName.setFont(font);
+    enterName.setString("Enter your name:");
+    enterName.setFillColor(Color::White);
+    enterName.setCharacterSize(30);
+    enterName.setPosition((window->getSize().x / 2) - (enterName.getGlobalBounds().width / 2), (window->getSize().y / 2) - (winner.getGlobalBounds().height + 100.f));
+
+    username.setFont(font);
+    username.setString("");
+    username.setFillColor(Color::Red);
+    username.setCharacterSize(50);
+    username.setPosition((window->getSize().x / 2) - (username.getGlobalBounds().width / 2), (window->getSize().y / 2) - (winner.getGlobalBounds().height + 25.f));
 }

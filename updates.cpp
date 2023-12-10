@@ -1,5 +1,4 @@
 #include "game.hpp"
-#include <SFML/System/String.hpp>
 
 void game::updateMouse(){
     this->mousePosW = Mouse::getPosition(*this->window);
@@ -400,7 +399,7 @@ void game::updateGameEvent() {
                     cout << endl;
                     cout << "Deck size: " << gameDeck.size() << endl;
                     this->stand = true;
-                    current->points += current->d.overallValue;
+                    current->points += current ->d.overallValue;
                 }
                 else if(pauseButton.isMouseOver(*window)) {
                     this->paused = true;
@@ -513,7 +512,7 @@ void game::updateWinScreen(){
                 this->username.setString(this->input);
                 username.setPosition((window->getSize().x / 2) - (username.getGlobalBounds().width / 2), (window->getSize().y / 2) - (winner.getGlobalBounds().height - 15.f));
                 break;
-                
+
             default:
                 break;
         }
@@ -624,7 +623,7 @@ void game::renderWinScreen() {
     window->draw(mainMenuBG);
     window->draw(winner);
     mainMenuButton.drawButton(*window);
-    window->draw(entername);
+    window->draw(enterName);
     window->draw(username);
     window->display();
 }

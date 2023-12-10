@@ -240,7 +240,7 @@ class game{
     Text bustText;
     Text winner;
     Text loseText;
-    Text entername;
+    Text enterName;
     Text username;
     string input;
 
