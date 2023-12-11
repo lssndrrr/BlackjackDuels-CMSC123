@@ -558,8 +558,9 @@ void game::intTex(){
     Vector2f positionnextbtn((windowSize.x - nextbtnSize.x) / 2, (windowSize.y - nextbtnSize.y) / 2 + 250.5f);
     nextButton.setPosition(positionnextbtn);
 
-    float NBtextPosX = positionstartbtn.x + (startbtnSize.x / 2.f) - (nextButton.text.getLocalBounds().width / 2.f);
-    nextButton.text.setPosition(NBtextPosX, SBtextPosY);
+    float NBtextPosX = positionnextbtn.x + (nextbtnSize.x / 2.f) - (nextButton.text.getLocalBounds().width / 2.f);
+    float NBtextPosY = positionnextbtn.y + (nextbtnSize.y / 2.f) - (nextButton.text.getLocalBounds().height / 2.f + 17.0f);
+    nextButton.text.setPosition(NBtextPosX, NBtextPosY);
 
     /////////   
 
@@ -684,8 +685,8 @@ void game::intTex(){
     pauseText.setFont(font);
     pauseText.setString("PAUSED");
     pauseText.setFillColor(Color::Red);
-    pauseText.setCharacterSize(100);
-    pauseText.setPosition((window->getSize().x / 2) - (pauseText.getGlobalBounds().width / 2), (window->getSize().y / 2) - (pauseText.getGlobalBounds().height / 2 + 25.f));
+    pauseText.setCharacterSize(150);
+    pauseText.setPosition((window->getSize().x / 2) - (pauseText.getGlobalBounds().width / 2), (window->getSize().y / 2) - (pauseText.getGlobalBounds().height / 2 + 75.f));
     
     bustText.setFont(font);
     bustText.setString("BUST!");

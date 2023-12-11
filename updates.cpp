@@ -505,7 +505,7 @@ void game::updateWinScreen(){
             case Event::TextEntered:  
                 if(this->event.text.unicode == '\b' && input.size() > 0)
                     this->input.erase(input.end()-1);
-                else if(this->event.text.unicode == 13 || this->event.text.unicode == ','){
+                else if(this->event.text.unicode == 13 || this->event.text.unicode == ',' || this->event.text.unicode == ' '){
                     this->input += "";
                     cout << this->event.text.unicode << endl; 
                 }else if(this->event.text.unicode != '\b')

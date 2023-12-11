@@ -83,6 +83,9 @@ void Leaderboard::readData(){
         
         // tokenized strings
         name = line.substr(0,i);
+
+        cout << line.substr(i+1) << endl;
+
         points = stoi(line.substr(i+1));
         
         Record *n = new Record(name, points);

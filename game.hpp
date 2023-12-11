@@ -351,6 +351,10 @@ class menu {
     button playButton;
     button tutorialButton;
     button backButton;
+    button LBButton;
+
+    //Text
+    Text lbText;
 
     //game
     game *g;

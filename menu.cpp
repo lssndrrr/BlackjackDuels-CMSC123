@@ -42,10 +42,18 @@ void menu::intMenuTex() {
     Death.setTexture(Deathtexture);
     window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
     Title.setTexture(Titletexture);
-    playButton.setButton("Play", Vector2f(175.0, 70.0), 50, &Buttontexture, Color::Black, &font);
-    tutorialButton.setButton("Learn", Vector2f(175.0, 70.0), 50, &Buttontexture, Color::Black, &font);
+    playButton.setButton("START!", Vector2f(280.0, 70.0), 40, &Buttontexture, Color::Black, &font);
+    tutorialButton.setButton("Tutorial", Vector2f(280.0, 70.0), 40, &Buttontexture, Color::Black, &font);
+    LBButton.setButton("Leaderboard", Vector2f(280.0, 70.0), 40, &Buttontexture, Color::Black, &font);
     backButton.setButton("Back", Vector2f(175.0, 70.0), 50, &Buttontexture, Color::Black, &font);
     Tutorial.setTexture(Tutorialtexture);
+
+    //Texts
+    lbText.setFont(font);
+    lbText.setString("LEADERBOARD");
+    lbText.setFillColor(Color::White);
+    lbText.setCharacterSize(50);
+    lbText.setPosition(((float)window->getSize().x - lbText.getGlobalBounds().width)/2, 100.f);
 
     //scaling texture
     mainMenuBG.setScale(windowSize.x / MMBGtexture.getSize().x, windowSize.y / MMBGtexture.getSize().y);
@@ -66,7 +74,7 @@ void menu::intMenuTex() {
     Title.setPosition(positionTitle);
 
     Vector2f playbtnSize = playButton.btn.getLocalBounds().getSize();
-    Vector2f positionplaybtn((windowSize.x - playbtnSize.x) / 2, (windowSize.y - playbtnSize.y) / 2 + 110.5f);
+    Vector2f positionplaybtn((windowSize.x - playbtnSize.x) / 2, (windowSize.y - playbtnSize.y) / 2 + 90.5f);
     playButton.setPosition(positionplaybtn);
 
     float PBtextPosX = positionplaybtn.x + (playbtnSize.x / 2.f) - (playButton.text.getLocalBounds().width / 2.f);
@@ -74,7 +82,7 @@ void menu::intMenuTex() {
     playButton.text.setPosition(PBtextPosX, PBtextPosY);
 
     Vector2f tutorialbtnSize = tutorialButton.btn.getLocalBounds().getSize();
-    Vector2f positiontutorialbtn((windowSize.x - tutorialbtnSize.x) / 2, (windowSize.y - tutorialbtnSize.y) / 2 + 210.5f);
+    Vector2f positiontutorialbtn((windowSize.x - tutorialbtnSize.x) / 2, (windowSize.y - tutorialbtnSize.y) / 2 + 250.5f);
     tutorialButton.setPosition(positiontutorialbtn);
     
     float TBtextPosX = positiontutorialbtn.x + (tutorialbtnSize.x / 2.f) - (tutorialButton.text.getLocalBounds().width / 2.f);
@@ -88,6 +96,14 @@ void menu::intMenuTex() {
     float BBtextPosX = positionbackbtn.x + (backbtnSize.x / 2.f) - (backButton.text.getLocalBounds().width / 2.f);
     float BBtextPosY = positionbackbtn.y + (backbtnSize.y / 2.f) - (backButton.text.getLocalBounds().height / 2.f) - 15.f;
     backButton.text.setPosition(BBtextPosX, BBtextPosY);
+
+    Vector2f LBbtnSize = LBButton.btn.getLocalBounds().getSize();
+    Vector2f positionLBbtn((windowSize.x - LBbtnSize.x) / 2, (windowSize.y - LBbtnSize.y) / 2 + 170.f);
+    LBButton.setPosition(positionLBbtn);
+
+    float LBtextPosX = positionLBbtn.x + (LBbtnSize.x / 2.f) - (LBButton.text.getLocalBounds().width / 2.f);
+    float LBtextPosY = positionLBbtn.y + (LBbtnSize.y / 2.f) - (LBButton.text.getLocalBounds().height / 2.f + 15.5f);
+    LBButton.text.setPosition(LBtextPosX, LBtextPosY);
 }
 
 void menu::intMenuWin() {
@@ -156,6 +172,13 @@ void menu::update() {
                     else {
                         tutorialButton.setTextColor(Color::Black);
                     }
+
+                    if (LBButton.isMouseOver(*window)){
+                        LBButton.setTextColor(Color::Green);
+                    } 
+                    else {
+                        LBButton.setTextColor(Color::Black);
+                    }
                     break;
 
                 case Event::MouseButtonPressed:
@@ -164,6 +187,9 @@ void menu::update() {
                     } 
                     else if(this->event.mouseButton.button == Mouse::Left && tutorialButton.isMouseOver(*window)){
                         this->menuState = menuState::tutorialScreen;
+                    }
+                    else if(this->event.mouseButton.button == Mouse::Left && LBButton.isMouseOver(*window)){
+                        this->menuState = menuState::leaderboard;
                     }
                     break;
 
@@ -215,7 +241,46 @@ void menu::update() {
         }
     }
     else if(this->menuState == menuState::leaderboard) {
+        while (this->window->pollEvent(this->event)) {
+            switch (this->event.type){
+                case Event::Closed:
+                    window->close();
+                    break;
+                case Event::KeyPressed:
+                    if(this->event.key.code == Keyboard::Escape)
+                        window->close();
+                    break;
+                case Event::Resized:
+                    aspectRatio = static_cast<float>(event.size.width) / event.size.height;
+                    viewWidth, viewHeight;
+                    if(aspectRatio > 16.f / 9.f){
+                        viewHeight = static_cast<float>(event.size.height);
+                        viewWidth = viewHeight * (16.f / 9.f);
+                    } else{
+                        viewWidth = static_cast<float>(event.size.width);
+                        viewHeight = viewWidth / (16.f / 9.f);
+                    }
+                    this->view.setSize(viewWidth, viewHeight);
+                    window->setSize(Vector2u(viewWidth, viewHeight));
+                    break;
+                case Event::MouseMoved:
+                    if (backButton.isMouseOver(*window)){
+                        backButton.setTextColor(Color::Green);
+                    } else {
+                        backButton.setTextColor(Color::Black);
+                    }
+                    break;
 
+                case Event::MouseButtonPressed:
+                    if (this->event.mouseButton.button == Mouse::Left && backButton.isMouseOver(*window)){
+                        this->menuState = menuState::mainMenu;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 }
 
@@ -228,6 +293,7 @@ void menu::render() {
         window->draw(Title);
         playButton.drawButton(*window);
         tutorialButton.drawButton(*window);
+        LBButton.drawButton(*window);
     }
     else if(this->menuState == menuState::tutorialScreen) {
         window->draw(mainMenuBG);
@@ -235,7 +301,9 @@ void menu::render() {
         window->draw(Tutorial);
     }
     else if(this->menuState == menuState::leaderboard) {
-
+        window->draw(mainMenuBG);
+        backButton.drawButton(*window);
+        window->draw(lbText);
     }
 
     this->window->display();
