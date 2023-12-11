@@ -73,6 +73,7 @@ void playerList::displayPlayers(){
 
     while(p != playerlist.end()) {
         cout << "Position: " << getPosition(&(*p)) << " Health: " << getHealth(&(*p)) << " Mana: " << getMana(&(*p)) << endl;
+        cout << "Points: " << p->points << endl;
         ++p;
     }
 }

@@ -108,6 +108,7 @@ const bool menu::running() const {
 }
 
 void menu::run() {
+    winners.readData();
     while(this->running()) {
         this->update();
         this->render();
@@ -244,36 +245,36 @@ void menu::createGame() {
     this->g = new game(this->window, this->view, this->video);
     player winner = g->run();
 
-    insertWinner(winner);
+    winners.insort(winner.getUsername(), winner.getPoints());
+    winners.writeData();
 }
 
-void menu::insertWinner(player winner) {
-    if(this->winners.empty())
-        winners.push_back(winner);
-    else {
-        list<player>::iterator i = this->winners.begin();
-        while(i != this->winners.end()) { //winners are arranged in descending order
-            if(winner.getPoints() >= (*i).getPoints()) {
-                this->winners.insert(i,winner);
-                return;
-            }
-            i++;
-        }
+// void menu::insertWinner(player winner) {
+//     if(this->winners.empty())
+//         winners.push_back(winner);
+//     else {
+//         list<player>::iterator i = this->winners.begin();
 
-        this->winners.push_back(winner);
-    }
+//         while(i != this->winners.end()) { //winners are arranged in descending order
+//             if(winner.getPoints() >= (*i).getPoints()) {
+//                 this->winners.insert(i,winner);
+//                 return;
+//             }
+//             i++;
+//         }
 
-    displayWinners();
-}
+//         this->winners.push_back(winner);
+//     }
 
-void menu::displayWinners() {
-    list<player>::iterator i = this->winners.begin();
-    int pos = 1;
+//     displayWinners();
+// }
 
-    cout << "LEADERBOARD---------------" << endl;
+// void menu::displayWinners() {
+//     list<player>::iterator i = this->winners.begin();
+//     int pos = 1;
 
-    while(i != this->winners.end()) {
-        cout << pos << ". " << (*i).getUsername() << " - " << (*i).getPoints() << " points" << endl;
-        i++;
-    }
-}
+//     while(i != this->winners.end()) {
+//         cout << pos << ". " << (*i).getUsername() << " - " << (*i).getPoints() << " points" << endl;
+//         i++;
+//     }
+// }

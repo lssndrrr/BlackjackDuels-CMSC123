@@ -9,6 +9,7 @@
 #include "updates.cpp"
 #include "header.hpp"
 #include "menu.cpp"
+#include "leaderboard.cpp"
 
 int main(){
     menu m;

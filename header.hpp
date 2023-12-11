@@ -2,6 +2,7 @@
 #define HEADER_HPP
 
 #include <iostream>
+#include <fstream>
 #include <random>
 #include <vector>
 #include <deque>
@@ -21,6 +22,8 @@ using std::cin;
 using std::vector;
 using std::deque;
 using std::list;
+using std::ifstream;
+using std::ofstream;
 
 
 class playerList;
@@ -128,6 +131,44 @@ public:
     void displayPlayers();
     friend class game;
     friend class deck;
+};
+
+// Record for each player (node)
+class Record{
+public:
+    // Attributes
+    string username;
+    int points;
+    Record* next;
+    
+    // Constructor
+    Record();
+    Record(string, int);
+};
+
+// Leaderboard singly linked list implementation
+class Leaderboard{
+private:
+    // Attributes
+    int length;
+    Record* head, * tail;
+
+    // Functions
+    void insertHead(Record*);
+    void insertTail(Record*);
+
+public:
+    // Constructor Destructor
+    Leaderboard();
+    ~Leaderboard();
+
+    // Functions
+    int size();
+    void insort(string, int);
+    void deleteRecords();
+    void readData();
+    void writeData();
+    // void displayData();
 };
 
 #endif
