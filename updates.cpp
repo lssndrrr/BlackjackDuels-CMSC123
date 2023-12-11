@@ -502,12 +502,13 @@ void game::updateWinScreen(){
                 }
                 break;
 
-            case Event::TextEntered:
+            case Event::TextEntered:  
                 if(this->event.text.unicode == '\b' && input.size() > 0)
                     this->input.erase(input.end()-1);
-                else if(this->event.text.unicode == '\n' || this->event.text.unicode == ',')
+                else if(this->event.text.unicode == 13 || this->event.text.unicode == ','){
                     this->input += "";
-                else if(this->event.text.unicode != '\b')
+                    cout << this->event.text.unicode << endl; 
+                }else if(this->event.text.unicode != '\b')
                     this->input += this->event.text.unicode;
 
                 players.playerlist.front().setUsername(input);
