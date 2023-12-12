@@ -54,8 +54,9 @@ void menu::intMenuTex() {
     lbText.setFont(font);
     lbText.setString("HALL OF FAME");
     lbText.setFillColor(Color::White);
-    lbText.setCharacterSize(50);
-    lbText.setPosition(((float)window->getSize().x - lbText.getGlobalBounds().width)/2, 100.f);
+    lbText.setCharacterSize(75);
+    lbText.setPosition(((float)window->getSize().x - lbText.getGlobalBounds().width)/2, 50.f);
+
 
     //scaling texture
     mainMenuBG.setScale(windowSize.x / MMBGtexture.getSize().x, windowSize.y / MMBGtexture.getSize().y);
@@ -320,6 +321,55 @@ void menu::createGame() {
 
     winners.insort(winner.getUsername(), winner.getPoints());
     winners.writeData();
+}
+
+void menu::updateLeaderboard(){
+    if(winners.size() == 0)
+        return;
+    
+    for(int i = 0; i < winners.size(); i++){
+        if(i == 10)
+            return;
+
+        lbUsernames[i].setFont(font);
+        lbUsernames[i].setString(std::to_string(i+1) + ". " + winners[i]->getUsername());
+        lbUsernames[i].setCharacterSize(50);
+        lbUsernames[i].setPosition(((float)window->getSize().x - lbText.getGlobalBounds().width)/3, 175.f + (75.f * i));
+
+        lbPoints[i].setFont(font);
+        lbPoints[i].setString(winners[i]->getPoints());
+        lbPoints[i].setCharacterSize(50);
+        lbPoints[i].setPosition(((float)window->getSize().x - lbText.getGlobalBounds().width)*12/10, 175.f + (75.f * i));
+        
+        if(i == 0){
+            lbPoints[i].setFillColor(Color(218,165,32));
+            lbUsernames[i].setFillColor(Color(218,165,32));
+        }else if(i == 1){
+            lbPoints[i].setFillColor(Color(172,172,172));
+            lbUsernames[i].setFillColor(Color(172,172,172));
+        }else if(i == 2){
+            lbPoints[i].setFillColor(Color(150,116,68));
+            lbUsernames[i].setFillColor(Color(150,116,68));
+        }else{
+            lbPoints[i].setFillColor(Color::White);
+            lbUsernames[i].setFillColor(Color::White);
+        }
+    }
+}
+
+void menu::intLeaderboard(){
+    for(int i = 0; i < 10; i++){
+        lbUsernames[i].setFont(font);
+        lbUsernames[i].setString(std::to_string(i+1) + ". ");
+        lbUsernames[i].setFillColor(Color::White);
+        lbUsernames[i].setCharacterSize(50);
+        lbUsernames[i].setPosition(((float)window->getSize().x - lbText.getGlobalBounds().width)/3, 175.f + (75.f * i));
+        lbPoints[i].setFont(font);
+        lbPoints[i].setString("");
+        lbPoints[i].setFillColor(Color::White);
+        lbPoints[i].setCharacterSize(50);
+        lbPoints[i].setPosition(((float)window->getSize().x - lbText.getGlobalBounds().width)*12/10  , 175.f + (75.f * i));
+    }
 }
 
 // void menu::insertWinner(player winner) {
