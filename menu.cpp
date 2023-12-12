@@ -14,6 +14,30 @@ menu::~menu() {
     delete this->window;
 }
 
+void menu::titleLoop() {
+    if(loop.getElapsedTime().asMilliseconds()/100 >= 6)
+        loop.restart();
+
+    if(loop.getElapsedTime().asMilliseconds()/100 == 0)
+        Titletexture.loadFromFile("Textures/title/00.png");
+    else if(loop.getElapsedTime().asMilliseconds()/100 == 1)
+        Titletexture.loadFromFile("Textures/title/01.png");
+    else if(loop.getElapsedTime().asMilliseconds()/100 == 2)
+        Titletexture.loadFromFile("Textures/title/02.png");
+    else if(loop.getElapsedTime().asMilliseconds()/100 == 3)
+        Titletexture.loadFromFile("Textures/title/03.png");
+    else if(loop.getElapsedTime().asMilliseconds()/100 == 4)
+        Titletexture.loadFromFile("Textures/title/04.png");
+    else if(loop.getElapsedTime().asMilliseconds()/100 == 5)
+        Titletexture.loadFromFile("Textures/title/05.png");
+
+    Title.setTexture(Titletexture);
+    Title.setScale(0.5, 0.5);
+    Vector2f TitleSpriteSize = Title.getLocalBounds().getSize() * 0.5f;
+    Vector2f positionTitle((window->getSize().x - TitleSpriteSize.x) / 2, (window->getSize().y - TitleSpriteSize.y) / 2 - 20.0f);
+    Title.setPosition(positionTitle);
+}
+
 void menu::intMenuTex() {
     Vector2f windowSize = Vector2f(window->getSize());
 
@@ -54,7 +78,6 @@ void menu::intMenuTex() {
     mainMenuBG.setTexture(MMBGtexture);
     Death.setTexture(Deathtexture);
     window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-    Title.setTexture(Titletexture);
     playButton.setButton("START!", Vector2f(280.0, 70.0), 40, &Buttontexture, Color::Black, &font);
     tutorialButton.setButton("Tutorial", Vector2f(280.0, 70.0), 40, &Buttontexture, Color::Black, &font);
     LBButton.setButton("Leaderboard", Vector2f(280.0, 70.0), 40, &Buttontexture, Color::Black, &font);
@@ -72,7 +95,6 @@ void menu::intMenuTex() {
     //scaling texture
     mainMenuBG.setScale(windowSize.x / MMBGtexture.getSize().x, windowSize.y / MMBGtexture.getSize().y);
     Death.setScale(2.0, 2.0);
-    Title.setScale(0.5, 0.5);
     Tutorial.setScale(windowSize.x / Tutorialtexture.getSize().x, windowSize.y / Tutorialtexture.getSize().y);
 
     //position
@@ -82,10 +104,6 @@ void menu::intMenuTex() {
     Vector2f deathSpriteSize = Death.getLocalBounds().getSize() * 2.0f;
     Vector2f positionDeath((windowSize.x - deathSpriteSize.x) / 2, (windowSize.y - deathSpriteSize.y) / 2 - 110.0f);
     Death.setPosition(positionDeath);
-
-    Vector2f TitleSpriteSize = Title.getLocalBounds().getSize() * 0.5f;
-    Vector2f positionTitle((windowSize.x - TitleSpriteSize.x) / 2, (windowSize.y - TitleSpriteSize.y) / 2 - 20.0f);
-    Title.setPosition(positionTitle);
 
     Vector2f playbtnSize = playButton.btn.getLocalBounds().getSize();
     Vector2f positionplaybtn((windowSize.x - playbtnSize.x) / 2, (windowSize.y - playbtnSize.y) / 2 + 90.5f);
@@ -146,6 +164,8 @@ void menu::run() {
 
 void menu::update() {
     if(this->menuState == menuState::mainMenu) {
+        titleLoop();
+
         while (this->window->pollEvent(this->event)) {
             switch (this->event.type) {
                 case Event::Closed:

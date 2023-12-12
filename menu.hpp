@@ -57,6 +57,9 @@ class menu {
     //leaderboard
     Leaderboard winners;
 
+    //clock
+    Clock loop;
+
 public:
     menu();
     ~menu();
@@ -72,6 +75,7 @@ public:
     void update();
     void render();
     void createGame();
+    void titleLoop();
 };
 
 #endif // !MENU_HPP
