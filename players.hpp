@@ -3,6 +3,7 @@
 #define PLAYERS_HPP
 
 #include "header.hpp"
+#include "characters.hpp"
 #include "deck.hpp"
 
 class player {
@@ -36,21 +37,6 @@ public:
     void displayPlayers();
     friend class game;
     friend class deck;
-};
-
-// Record for each player (node)
-class Record {
-public:
-    // Attributes
-    string username;
-    int points;
-    Record *next;
-
-    // Constructor
-    Record();
-    Record(string, int);
-    string getUsername();
-    string getPoints();
 };
 
 #endif // !PLAYERS_HPP

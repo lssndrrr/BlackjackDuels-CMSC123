@@ -5,7 +5,7 @@
 #include "players.hpp"
 #include "deck.hpp"
 
-class button{
+class button {
     public:
         RectangleShape btn;
         Text text;
@@ -29,9 +29,7 @@ class dashboard {
         void drawDashboard(RenderWindow &window);
 };
 
-enum gameState{
-    // mainMenu,
-    // tutorialScreen,
+enum gameState {
     chooseNumPlayersScreen,
     chooseCharScreen,
     mainGameScreen,
@@ -40,7 +38,7 @@ enum gameState{
     loseScreen
 };
 
-class game{
+class game {
     // SFML Basics
     RenderWindow *window;
     View view;
@@ -74,127 +72,23 @@ class game{
     Text num;
 
     //Characters
-    Texture jackTex;
-    Texture jakeTex;
-    Texture jacksonTex;
-    Texture jadeTex;
-    Texture jackMenuTex;
-    Texture jakeMenuTex;
-    Texture jacksonMenuTex;
-    Texture jadeMenuTex;
+    Texture jackTex, jakeTex, jacksonTex, jadeTex;
+    Texture jackMenuTex, jakeMenuTex, jacksonMenuTex, jadeMenuTex;
 
-    Sprite jackSprite;
-    Sprite jakeSprite;
-    Sprite jacksonSprite;
-    Sprite jadeSprite;
+    Sprite jackSprite, jakeSprite, jacksonSprite, jadeSprite;
 
     // cards
-    Texture C0;
-    Texture C1;
-    Texture C2;
-    Texture C3;
-    Texture C4;
-    Texture C5;
-    Texture C6;
-    Texture C7;
-    Texture C8;
-    Texture C9;
-    Texture C10;
-    Texture C11;
-    Texture C12;
-    Texture D0;
-    Texture D1;
-    Texture D2;
-    Texture D3;
-    Texture D4;
-    Texture D5;
-    Texture D6;
-    Texture D7;
-    Texture D8;
-    Texture D9; 
-    Texture D10;
-    Texture D11;
-    Texture D12;
-    Texture H0;
-    Texture H1;
-    Texture H2;
-    Texture H3;
-    Texture H4;
-    Texture H5;
-    Texture H6;
-    Texture H7;
-    Texture H8;
-    Texture H9;
-    Texture H10;
-    Texture H11;
-    Texture H12;
-    Texture S0;
-    Texture S1;
-    Texture S2;
-    Texture S3;
-    Texture S4;
-    Texture S5;
-    Texture S6;
-    Texture S7;
-    Texture S8;
-    Texture S9;
-    Texture S10;
-    Texture S11;
-    Texture S12;
+    Texture C0, C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12;
+    Texture D0, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12;
+    Texture H0, H1, H2, H3, H4, H5, H6, H7, H8, H9, H10, H11, H12;
+    Texture S0, S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12;
+
 
     Sprite tempSprite;
-    Sprite C0Sprite;
-    Sprite C1Sprite;
-    Sprite C2Sprite;
-    Sprite C3Sprite;
-    Sprite C4Sprite;
-    Sprite C5Sprite;
-    Sprite C6Sprite;
-    Sprite C7Sprite;
-    Sprite C8Sprite;
-    Sprite C9Sprite;
-    Sprite C10Sprite;
-    Sprite C11Sprite;
-    Sprite C12Sprite;
-    Sprite D0Sprite;
-    Sprite D1Sprite;
-    Sprite D2Sprite;
-    Sprite D3Sprite;
-    Sprite D4Sprite;
-    Sprite D5Sprite;
-    Sprite D6Sprite;
-    Sprite D7Sprite;
-    Sprite D8Sprite;
-    Sprite D9Sprite;
-    Sprite D10Sprite;
-    Sprite D11Sprite;
-    Sprite D12Sprite;
-    Sprite H0Sprite;
-    Sprite H1Sprite;
-    Sprite H2Sprite;
-    Sprite H3Sprite;
-    Sprite H4Sprite;
-    Sprite H5Sprite;
-    Sprite H6Sprite;
-    Sprite H7Sprite;
-    Sprite H8Sprite;
-    Sprite H9Sprite;
-    Sprite H10Sprite;
-    Sprite H11Sprite;
-    Sprite H12Sprite;
-    Sprite S0Sprite;
-    Sprite S1Sprite;
-    Sprite S2Sprite;
-    Sprite S3Sprite;
-    Sprite S4Sprite;
-    Sprite S5Sprite;
-    Sprite S6Sprite;
-    Sprite S7Sprite;
-    Sprite S8Sprite;
-    Sprite S9Sprite;
-    Sprite S10Sprite;
-    Sprite S11Sprite;
-    Sprite S12Sprite;
+    Sprite C0Sprite, C1Sprite, C2Sprite, C3Sprite, C4Sprite, C5Sprite, C6Sprite, C7Sprite, C8Sprite, C9Sprite, C10Sprite, C11Sprite, C12Sprite;
+    Sprite D0Sprite, D1Sprite, D2Sprite, D3Sprite, D4Sprite, D5Sprite, D6Sprite, D7Sprite, D8Sprite, D9Sprite, D10Sprite, D11Sprite, D12Sprite;
+    Sprite H0Sprite, H1Sprite, H2Sprite, H3Sprite, H4Sprite, H5Sprite, H6Sprite, H7Sprite, H8Sprite, H9Sprite, H10Sprite, H11Sprite, H12Sprite;
+    Sprite S0Sprite, S1Sprite, S2Sprite, S3Sprite, S4Sprite, S5Sprite, S6Sprite, S7Sprite, S8Sprite, S9Sprite, S10Sprite, S11Sprite, S12Sprite;
 
     // buttons
     button playButton;
@@ -279,8 +173,6 @@ public:
     void render();
 
     // updates
-    void updateMainMenu();
-    void updateTutorial();
     void updateChooseNumPlayers();
     void updateChooseCharScreen();
     void updateGameEvent();
@@ -288,7 +180,6 @@ public:
     void updateWinScreen();
 
     // render
-    void renderMainMenu();
     void renderChooseNum();
     void renderChooseChar();
     void renderMainGame();
@@ -296,8 +187,6 @@ public:
     void renderWinScreen();
 
     // main game render
-    void renderButtons();
-    void setBackground();
     void setCandle();
     void setDeathIdle();
     void setDashboard();
@@ -308,12 +197,10 @@ public:
     void restoreCards();
     
     // game logic
-    void runRound();
     void intCardSprites();
 
     void renderDeck();
     void renderCard(const card&, float, float);
-    //void initRound();
 };
 
 

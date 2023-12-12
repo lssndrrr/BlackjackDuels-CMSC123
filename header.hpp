@@ -1,3 +1,4 @@
+#pragma once
 #ifndef HEADER_HPP
 #define HEADER_HPP
 
@@ -24,31 +25,6 @@ using std::deque;
 using std::list;
 using std::ifstream;
 using std::ofstream;
-
-
-class playerList;
-
-
-//character
-enum charType {
-    jackChar,
-    jakeChar,
-    jacksonChar,
-    jadeChar,
-    none
-};
-
-class character {
-    public:
-        charType type = none;
-        Sprite *charSprite;
-        string name;
-};
-
-
-// player
-
-// Leaderboard singly linked list implementation
 
 
 #endif

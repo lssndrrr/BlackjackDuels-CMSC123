@@ -70,25 +70,26 @@ void Leaderboard::deleteRecords(){
 
 void Leaderboard::readData(){
     ifstream file("Leaderboards.txt");
+
     int i, rounds, points, size;
     string line, name;
 
     // number of entries in leaderboard
     file >> size;
-    for(size; size; size--){
+    for(size; size; size--) {
         file >> line;
 
         // tokenize line per '/'
         // index of delimiters
         i = line.find_first_of(',');
-        
+
         // tokenized strings
-        name = line.substr(0,i);
+        name = line.substr(0, i);
 
-        cout << line.substr(i+1) << endl;
+        cout << line.substr(i + 1) << endl;
 
-        points = stoi(line.substr(i+1));
-        
+        points = stoi(line.substr(i + 1));
+
         Record *n = new Record(name, points);
         insertTail(n);
     }

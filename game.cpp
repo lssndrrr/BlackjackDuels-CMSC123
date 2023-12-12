@@ -153,9 +153,6 @@ player game::update(){
                     }
                 }
 
-                // if(this->state == gameState::mainMenu)
-                //     break;
-
                 if(!this->out) {
                     if(highestValue < current->d.overallValue && current->d.overallValue < 22)
                         highestValue = current->d.overallValue;
@@ -167,9 +164,6 @@ player game::update(){
                 }
                 this->stand = this->lose = this->out = false;
             }
-
-            // if(this->state == gameState::mainMenu)
-            //     break;
 
             current = players.playerlist.begin();
             while(current != players.playerlist.end()){
@@ -203,9 +197,6 @@ player game::update(){
                     current = tmp;
                 }
             }
-
-            // if(this->state == gameState::mainMenu)
-            //     break;
             
             cout << "Current standing:" << endl;
             players.displayPlayers();
@@ -219,18 +210,6 @@ player game::update(){
             winLoop();
             return players.playerlist.front();
         }
-        // else if(players.playerlist.size() == 0) {
-        //     this->state = gameState::winScreen;
-        //     this->end = true;
-
-        //     while(this->end) {
-        //         updateWinScreen();
-        //         renderWinScreen();
-        //     }
-        // }
-
-        //if playerlist.getSize == 1 -> state = winScreen
-        //if playerlist.getSize == 0 -> state = loseScreen
     }
     else if (state == gameState::winScreen) {
         std::stringstream winText;
@@ -241,9 +220,6 @@ player game::update(){
         winner.setString(winText.str());
         winner.setPosition((window->getSize().x / 2) - (winner.getGlobalBounds().width / 2), (window->getSize().y / 2) - (winner.getGlobalBounds().height + 200.f));
     }
-    // else if(state == gameState::loseScreen) {
-
-    // }
 
     return tmp;
 }
@@ -269,16 +245,6 @@ void game::restoreCards() {
 
 void game::render(){
     this->window->clear();
-
-    // if (state == gameState::mainMenu) {
-    //     renderMainMenu();
-    // } 
-    // else if(state == tutorialScreen){
-    //     window->draw(mainMenuBG);
-    //     backButton.drawButton(*window);
-    //     window->draw(Tutorial);
-    // }
-    // else
 
     if (state == gameState::chooseNumPlayersScreen) {
         renderChooseNum();

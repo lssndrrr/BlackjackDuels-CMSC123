@@ -3,10 +3,13 @@
 #define DECK_HPP
 
 #include "header.hpp"
+class playerList;
 
 /*
 DECK:
------ for all the deck stuff, including cards 
+----- for all the deck stuff.
+*** enum suit, enum rank, class card, class deck
+-> implementation is found in deck.cpp
 */
 
 enum suit {

@@ -5,6 +5,21 @@
 #include "header.hpp"
 #include "players.hpp"
 
+// Record for each player (node)
+class Record {
+public:
+    // Attributes
+    string username;
+    int points;
+    Record *next;
+
+    // Constructor
+    Record();
+    Record(string, int);
+    string getUsername();
+    string getPoints();
+};
+
 class Leaderboard {
 private:
     // Attributes
