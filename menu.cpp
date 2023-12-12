@@ -17,6 +17,12 @@ menu::~menu() {
 void menu::intMenuTex() {
     Vector2f windowSize = Vector2f(window->getSize());
 
+    //music and sfx
+    if(!menuMusic.openFromFile("Music/mainMenuMusic.wav"))
+        cout << "ERROR::menuMusic" << endl;
+    menuMusic.setLoop(true);
+    menuMusic.play();
+
     //loading textures
     if(!MMBGtexture.loadFromFile("Textures/mainmenubg.png")){
         cout << "ERROR::MMBGtexture" << endl;
@@ -318,7 +324,9 @@ void menu::render() {
 
 void menu::createGame() {
     this->g = new game(this->window, this->view, this->video);
+    menuMusic.stop();
     player winner = g->run();
+    menuMusic.play();
 
     winners.insort(winner.getUsername(), winner.getPoints());
     winners.writeData();

@@ -28,6 +28,9 @@ class menu {
     Texture Tutorialtexture;
     Image icon;
 
+    //Music and SFX
+    Music menuMusic;
+
     //sprites
     Sprite Death;
     Sprite mainMenuBG;

@@ -180,6 +180,13 @@ void game::setCandle() {
 void game::intTex(){
     std::vector<std::vector<sf::Texture>> cardTextures(4, std::vector<sf::Texture>(13));
     Vector2f windowSize = Vector2f(window->getSize());
+
+    //init music and sfx
+    if(!gameMusic.openFromFile("Music/gameMusic.wav"))
+        cout << "ERROR::gameMusic" << endl;
+    gameMusic.setLoop(true);
+    gameMusic.play();
+
     // loading texture
     if(!MMBGtexture.loadFromFile("Textures/mainmenubg.png")){
         cout << "ERROR::MMBGtexture" << endl;

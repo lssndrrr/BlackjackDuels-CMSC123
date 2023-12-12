@@ -83,12 +83,14 @@ class game {
     Texture H0, H1, H2, H3, H4, H5, H6, H7, H8, H9, H10, H11, H12;
     Texture S0, S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12;
 
-
     Sprite tempSprite;
     Sprite C0Sprite, C1Sprite, C2Sprite, C3Sprite, C4Sprite, C5Sprite, C6Sprite, C7Sprite, C8Sprite, C9Sprite, C10Sprite, C11Sprite, C12Sprite;
     Sprite D0Sprite, D1Sprite, D2Sprite, D3Sprite, D4Sprite, D5Sprite, D6Sprite, D7Sprite, D8Sprite, D9Sprite, D10Sprite, D11Sprite, D12Sprite;
     Sprite H0Sprite, H1Sprite, H2Sprite, H3Sprite, H4Sprite, H5Sprite, H6Sprite, H7Sprite, H8Sprite, H9Sprite, H10Sprite, H11Sprite, H12Sprite;
     Sprite S0Sprite, S1Sprite, S2Sprite, S3Sprite, S4Sprite, S5Sprite, S6Sprite, S7Sprite, S8Sprite, S9Sprite, S10Sprite, S11Sprite, S12Sprite;
+
+    //Music and SFX
+    Music gameMusic;
 
     // buttons
     button playButton;

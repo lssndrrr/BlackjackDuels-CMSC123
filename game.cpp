@@ -147,6 +147,7 @@ player game::update(){
                                 this->end = true;
                                 update();
                                 winLoop();
+                                gameMusic.stop();
                                 return players.playerlist.front();
                             }
                         }
@@ -181,6 +182,7 @@ player game::update(){
                             this->end = true;
                             update();
                             winLoop();
+                            gameMusic.stop();
                             return players.playerlist.front();
                         }
                     }
@@ -208,6 +210,7 @@ player game::update(){
             this->end = true;
             update();
             winLoop();
+            gameMusic.stop();
             return players.playerlist.front();
         }
     }
