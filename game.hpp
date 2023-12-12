@@ -355,6 +355,8 @@ class menu {
 
     //Text
     Text lbText;
+    Text lbUsernames[10];
+    Text lbPoints[10];
 
     //game
     game *g;
@@ -370,6 +372,8 @@ public:
     void intMenuTex();
     void intMenuWin();
     void intMenuVar();
+    void intLeaderboard();
+    void updateLeaderboard();
     const bool running() const;
     void run();
     void update();

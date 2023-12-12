@@ -99,10 +99,25 @@ void Leaderboard::writeData(){
     Record* tmp = head;
 
     file << length << std::endl;
+    int count = 0;
     while(tmp != NULL){
+        if(count == 10)
+            return;
         file << tmp->username << ',' << tmp->points << std::endl;
         tmp = tmp->next;
     } file.close();
+}
+
+Record* Leaderboard::operator[](int index){
+    if(length == 0)
+        throw "Cannot index when leaderboard size is 0";
+    Record* tmp = head;
+
+    for(int i = 0; i < index; i++){
+        tmp = tmp->next;
+    }
+
+    return tmp;
 }
 
 Record::Record(){
@@ -114,4 +129,12 @@ Record::Record(string username, int point){
     this->username = username;
     this->points = point;
     next = NULL;
+}
+
+string Record::getUsername(){
+    return this->username;
+}
+
+string Record::getPoints(){
+    return std::to_string(this->points);
 }

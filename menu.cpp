@@ -2,9 +2,11 @@
 #include "header.hpp"
 
 menu::menu() {
+    winners.readData();
     this->intMenuWin();
     this->intMenuTex();
     this->intMenuVar();
+    this->intLeaderboard();
 }
 
 menu::~menu() {
@@ -50,10 +52,11 @@ void menu::intMenuTex() {
 
     //Texts
     lbText.setFont(font);
-    lbText.setString("LEADERBOARD");
+    lbText.setString("HALL OF FAME");
     lbText.setFillColor(Color::White);
-    lbText.setCharacterSize(50);
-    lbText.setPosition(((float)window->getSize().x - lbText.getGlobalBounds().width)/2, 100.f);
+    lbText.setCharacterSize(75);
+    lbText.setPosition(((float)window->getSize().x - lbText.getGlobalBounds().width)/2, 50.f);
+
 
     //scaling texture
     mainMenuBG.setScale(windowSize.x / MMBGtexture.getSize().x, windowSize.y / MMBGtexture.getSize().y);
@@ -90,7 +93,7 @@ void menu::intMenuTex() {
     tutorialButton.text.setPosition(TBtextPosX, TBtextPosY);
 
     Vector2f backbtnSize = backButton.btn.getLocalBounds().getSize();
-    Vector2f positionbackbtn((windowSize.x - backbtnSize.x) / 2 - 400.f, (windowSize.y - backbtnSize.y) / 2 + 250.f);
+    Vector2f positionbackbtn((windowSize.x - backbtnSize.x) / 2 - 500.f, (windowSize.y - backbtnSize.y) / 2 + 250.f);
     backButton.setPosition(positionbackbtn);
     
     float BBtextPosX = positionbackbtn.x + (backbtnSize.x / 2.f) - (backButton.text.getLocalBounds().width / 2.f);
@@ -124,7 +127,6 @@ const bool menu::running() const {
 }
 
 void menu::run() {
-    winners.readData();
     while(this->running()) {
         this->update();
         this->render();
@@ -190,6 +192,7 @@ void menu::update() {
                     }
                     else if(this->event.mouseButton.button == Mouse::Left && LBButton.isMouseOver(*window)){
                         this->menuState = menuState::leaderboard;
+                        updateLeaderboard();
                     }
                     break;
 
@@ -304,8 +307,11 @@ void menu::render() {
         window->draw(mainMenuBG);
         backButton.drawButton(*window);
         window->draw(lbText);
+        for(int i = 0; i < 5; i++){
+            window->draw(lbUsernames[i]);
+            window->draw(lbPoints[i]);            
+        }
     }
-
     this->window->display();
 }
 
@@ -315,6 +321,43 @@ void menu::createGame() {
 
     winners.insort(winner.getUsername(), winner.getPoints());
     winners.writeData();
+}
+
+void menu::updateLeaderboard(){
+    if(winners.size() == 0)
+        return;
+    
+    for(int i = 0; i < winners.size(); i++){
+        if(i == 10)
+            return;
+
+        lbUsernames[i].setFont(font);
+        lbUsernames[i].setString(std::to_string(i+1) + ". " + winners[i]->getUsername());
+        lbUsernames[i].setFillColor(Color::White);
+        lbUsernames[i].setCharacterSize(50);
+        lbUsernames[i].setPosition(((float)window->getSize().x - lbText.getGlobalBounds().width)/3, 175.f + (75.f * i));
+
+        lbPoints[i].setFont(font);
+        lbPoints[i].setString(winners[i]->getPoints());
+        lbPoints[i].setFillColor(Color::White);
+        lbPoints[i].setCharacterSize(50);
+        lbPoints[i].setPosition(((float)window->getSize().x - lbText.getGlobalBounds().width)*12/10, 175.f + (75.f * i));
+    }
+}
+
+void menu::intLeaderboard(){
+    for(int i = 0; i < 10; i++){
+        lbUsernames[i].setFont(font);
+        lbUsernames[i].setString(std::to_string(i+1) + ". ");
+        lbUsernames[i].setFillColor(Color::White);
+        lbUsernames[i].setCharacterSize(50);
+        lbUsernames[i].setPosition(((float)window->getSize().x - lbText.getGlobalBounds().width)/3, 175.f + (75.f * i));
+        lbPoints[i].setFont(font);
+        lbPoints[i].setString("");
+        lbPoints[i].setFillColor(Color::White);
+        lbPoints[i].setCharacterSize(50);
+        lbPoints[i].setPosition(((float)window->getSize().x - lbText.getGlobalBounds().width)*12/10  , 175.f + (75.f * i));
+    }
 }
 
 // void menu::insertWinner(player winner) {
