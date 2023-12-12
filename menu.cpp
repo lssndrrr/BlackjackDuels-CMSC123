@@ -334,15 +334,27 @@ void menu::updateLeaderboard(){
 
         lbUsernames[i].setFont(font);
         lbUsernames[i].setString(std::to_string(i+1) + ". " + winners[i]->getUsername());
-        lbUsernames[i].setFillColor(Color::White);
         lbUsernames[i].setCharacterSize(50);
         lbUsernames[i].setPosition(((float)window->getSize().x - lbText.getGlobalBounds().width)/3, 175.f + (75.f * i));
 
         lbPoints[i].setFont(font);
         lbPoints[i].setString(winners[i]->getPoints());
-        lbPoints[i].setFillColor(Color::White);
         lbPoints[i].setCharacterSize(50);
         lbPoints[i].setPosition(((float)window->getSize().x - lbText.getGlobalBounds().width)*12/10, 175.f + (75.f * i));
+        
+        if(i == 0){
+            lbPoints[i].setFillColor(Color(218,165,32));
+            lbUsernames[i].setFillColor(Color(218,165,32));
+        }else if(i == 1){
+            lbPoints[i].setFillColor(Color(172,172,172));
+            lbUsernames[i].setFillColor(Color(172,172,172));
+        }else if(i == 2){
+            lbPoints[i].setFillColor(Color(150,116,68));
+            lbUsernames[i].setFillColor(Color(150,116,68));
+        }else{
+            lbPoints[i].setFillColor(Color::White);
+            lbUsernames[i].setFillColor(Color::White);
+        }
     }
 }
 
