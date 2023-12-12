@@ -14,3 +14,9 @@ sfml-window-d-2.dll
 game.exe
 .vscode
 MakeFile
+x64
+BJD.sln
+BJD.vcxproj
+BJD.vcxproj.filters
+BJD.vcxproj.user
+.vs
