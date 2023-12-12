@@ -91,6 +91,8 @@ class game {
 
     //Music and SFX
     Music gameMusic;
+    SoundBuffer clickButtonBuffer;
+    Sound clickButton;
 
     // buttons
     button playButton;

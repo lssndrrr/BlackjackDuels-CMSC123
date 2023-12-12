@@ -85,14 +85,18 @@ void game::updateChooseNumPlayers() {
         else if (this->event.type == Event::MouseButtonPressed) {
             if (this->event.mouseButton.button == Mouse::Left){
                 if (twoP.isMouseOver(*window)) {
+                    clickButton.play();
                     numPlayers = 2;
                 } else if (threeP.isMouseOver(*window)) {
+                    clickButton.play();
                     numPlayers = 3;
                 } else if (fourP.isMouseOver(*window)) {
+                    clickButton.play();
                     numPlayers = 4;
                 }
                 if (numPlayers != 0 && this->event.mouseButton.button == Mouse::Left) {
                     if (nextButton.isMouseOver(*window)){
+                        clickButton.play();
                         gameDeck.gameDeck();
                         gameDeck.shuffle();
                         players.addPlayers(numPlayers);
@@ -220,24 +224,30 @@ void game::updateChooseCharScreen() {
         else if(this->event.type == Event::MouseButtonPressed) {
             if(event.mouseButton.button == Mouse::Left) {
                 if(jack.isMouseOver(*window) && !jackFlag) {
+                    clickButton.play();
                     current->c.type = charType::jackChar;
                     jack.btn.setOutlineThickness(2.f);
                     jack.btn.setOutlineColor(sf::Color::Green);
                 }
                 else if(jake.isMouseOver(*window) && !jakeFlag) {
+                    clickButton.play();
                     current->c.type = charType::jakeChar;
                     jake.btn.setOutlineColor(sf::Color::Green);
                 }
                 else if(jackson.isMouseOver(*window) && !jacksonFlag) {
+                    clickButton.play();
                     current->c.type = charType::jacksonChar;
                     jackson.btn.setOutlineColor(sf::Color::Green);
                 }
                 else if(jade.isMouseOver(*window) && !jadeFlag) {
+                    clickButton.play();
                     current->c.type = charType::jadeChar;
                     jade.btn.setOutlineColor(sf::Color::Green);
                 }
 
-                if(nextButton.isMouseOver(*window) && (current->c.type == charType::jackChar || current->c.type == charType::jacksonChar || current->c.type == charType::jadeChar || current->c.type == charType::jakeChar)) {                  
+                if(nextButton.isMouseOver(*window) && (current->c.type == charType::jackChar || current->c.type == charType::jacksonChar || current->c.type == charType::jadeChar || current->c.type == charType::jakeChar)) { 
+                    clickButton.play(); 
+
                     if(current->c.type == charType::jackChar) {
                         current->c.charSprite = &jackSprite;
                         current->c.name = "Jack Black";
@@ -305,6 +315,8 @@ void game::updateGameEvent() {
         } else if (event.type == Event::MouseButtonPressed) {
             if (event.mouseButton.button == Mouse::Left) {
                 if(hitButton.isMouseOver(*window)) {
+                    clickButton.play();
+
                     if(current->d.overallValue < 22) {
                         restoreCards();
                         gameDeck.hitDeck(&(current->d));
@@ -321,6 +333,8 @@ void game::updateGameEvent() {
                     cout << "Deck size: " << gameDeck.size() << endl;
                 } 
                 else if(standButton.isMouseOver(*window)) {
+                    clickButton.play();
+
                     cout << "Your current overall value is " << current->d.overallValue << "! Next player!" << endl;
                     cout << endl;
                     cout << "Deck size: " << gameDeck.size() << endl;
@@ -328,6 +342,8 @@ void game::updateGameEvent() {
                     current->points += current ->d.overallValue;
                 }
                 else if(pauseButton.isMouseOver(*window)) {
+                    clickButton.play();
+
                     this->paused = true;
                 }
             }
@@ -377,6 +393,7 @@ void game::updatePauseScreen(){
 
             case Event::MouseButtonPressed:
                 if (this->event.mouseButton.button == Mouse::Left && startButton.isMouseOver(*window)){
+                    clickButton.play();
                     this->paused = false;
                     state = gameState::mainGameScreen;
                 }
@@ -423,6 +440,7 @@ void game::updateWinScreen(){
 
             case Event::MouseButtonPressed:
                 if (this->event.mouseButton.button == Mouse::Left && mainMenuButton.isMouseOver(*window)){
+                    clickButton.play();
                     this->open = false;
                     this->end = false;
                 }

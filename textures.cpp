@@ -187,6 +187,10 @@ void game::intTex(){
     gameMusic.setLoop(true);
     gameMusic.play();
 
+    if(!clickButtonBuffer.loadFromFile("Music/clickButton.wav"))
+        cout << "ERROR::clickButton" << endl;
+    clickButton.setBuffer(clickButtonBuffer);
+
     // loading texture
     if(!MMBGtexture.loadFromFile("Textures/mainmenubg.png")){
         cout << "ERROR::MMBGtexture" << endl;

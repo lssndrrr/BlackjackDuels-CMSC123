@@ -23,6 +23,10 @@ void menu::intMenuTex() {
     menuMusic.setLoop(true);
     menuMusic.play();
 
+    if(!clickButtonBuffer.loadFromFile("Music/clickButton.wav"))
+        cout << "ERROR::clickButton" << endl;
+    clickButton.setBuffer(clickButtonBuffer);
+
     //loading textures
     if(!MMBGtexture.loadFromFile("Textures/mainmenubg.png")){
         cout << "ERROR::MMBGtexture" << endl;
@@ -192,12 +196,15 @@ void menu::update() {
 
                 case Event::MouseButtonPressed:
                     if (this->event.mouseButton.button == Mouse::Left && playButton.isMouseOver(*window)){
+                        clickButton.play();
                         createGame();
                     } 
                     else if(this->event.mouseButton.button == Mouse::Left && tutorialButton.isMouseOver(*window)){
+                        clickButton.play();
                         this->menuState = menuState::tutorialScreen;
                     }
                     else if(this->event.mouseButton.button == Mouse::Left && LBButton.isMouseOver(*window)){
+                        clickButton.play();
                         this->menuState = menuState::leaderboard;
                         updateLeaderboard();
                     }
@@ -241,6 +248,7 @@ void menu::update() {
 
                 case Event::MouseButtonPressed:
                     if (this->event.mouseButton.button == Mouse::Left && backButton.isMouseOver(*window)){
+                        clickButton.play();
                         this->menuState = menuState::mainMenu;
                     }
                     break;
@@ -283,6 +291,7 @@ void menu::update() {
 
                 case Event::MouseButtonPressed:
                     if (this->event.mouseButton.button == Mouse::Left && backButton.isMouseOver(*window)){
+                        clickButton.play();
                         this->menuState = menuState::mainMenu;
                     }
                     break;

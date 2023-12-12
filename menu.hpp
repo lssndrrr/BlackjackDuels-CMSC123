@@ -30,6 +30,8 @@ class menu {
 
     //Music and SFX
     Music menuMusic;
+    SoundBuffer clickButtonBuffer;
+    Sound clickButton;
 
     //sprites
     Sprite Death;
