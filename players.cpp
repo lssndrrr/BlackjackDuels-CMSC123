@@ -1,12 +1,5 @@
 #include "game.hpp"
-
-playerList::playerList(){
-    // nada;
-}
-
-player::player() {
-
-}
+#include "players.hpp"
 
 player::player(int pos){
     this->health = 100;

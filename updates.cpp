@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include "deck.hpp"
 
 void game::updateMouse(){
     this->mousePosW = Mouse::getPosition(*this->window);

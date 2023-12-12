@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include "deck.hpp"
 
 void game::intCardSprites() {
     deque<card>::iterator current = gameDeck.cards.begin();

@@ -1,4 +1,5 @@
 #include "header.hpp"
+#include "leaderboard.hpp"
 
 Leaderboard::Leaderboard(){
     head = tail = NULL;

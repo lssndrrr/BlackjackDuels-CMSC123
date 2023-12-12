@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include "players.hpp"
 
 game::game(){
     this->intTex();

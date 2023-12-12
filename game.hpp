@@ -2,6 +2,8 @@
 #define GAME_HPP
 
 #include "header.hpp"
+#include "players.hpp"
+#include "deck.hpp"
 
 class button{
     public:
@@ -314,73 +316,5 @@ public:
     //void initRound();
 };
 
-// main menu classes
-//Main Menu classes
-
-enum menuState{
-    mainMenu,
-    tutorialScreen,
-    leaderboard
-};
-
-class menu {
-    //window
-    RenderWindow *window;
-    View view;
-    Event event;
-    VideoMode video;
-    float aspectRatio, viewHeight, viewWidth;
-    menuState menuState;
-
-    //textures
-    Texture MMBGtexture;
-    Texture Deathtexture;
-    Texture Titletexture;
-    Texture Buttontexture;
-    Texture Tutorialtexture;
-    Image icon;
-
-    //sprites
-    Sprite Death;
-    Sprite mainMenuBG;
-    Sprite Title;
-    Sprite Tutorial;
-    Font font;
-
-    //buttons
-    button playButton;
-    button tutorialButton;
-    button backButton;
-    button LBButton;
-
-    //Text
-    Text lbText;
-    Text lbUsernames[10];
-    Text lbPoints[10];
-
-    //game
-    game *g;
-
-    //leaderboard
-    Leaderboard winners;
-
-public:
-    menu();
-    ~menu();
-    
-    //initialize
-    void intMenuTex();
-    void intMenuWin();
-    void intMenuVar();
-    void intLeaderboard();
-    void updateLeaderboard();
-    const bool running() const;
-    void run();
-    void update();
-    void render();
-    void createGame();
-    // void insertWinner(player);
-    // void displayWinners();
-};
 
 #endif

@@ -1,5 +1,6 @@
 #include "game.hpp"
 #include "header.hpp"
+#include "menu.hpp"
 
 menu::menu() {
     winners.readData();

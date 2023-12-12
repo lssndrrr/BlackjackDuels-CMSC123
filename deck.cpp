@@ -1,4 +1,6 @@
 #include "game.hpp"
+#include "deck.hpp"
+#include "players.hpp"
 
 deck::deck(){
     overallValue = 0;
