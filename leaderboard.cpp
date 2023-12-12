@@ -71,6 +71,9 @@ void Leaderboard::deleteRecords(){
 void Leaderboard::readData(){
     ifstream file("Leaderboards.txt");
 
+    if(!file)
+        return;
+
     int i, rounds, points, size;
     string line, name;
 
