@@ -1,6 +1,9 @@
 #include "header.hpp"
 #include "game.hpp"
 #include "menu.hpp"
+#include "leaderboard.hpp"
+#include "deck.hpp"
+#include "players.hpp"
 
 // for vs code
 #include "abilities.cpp"
