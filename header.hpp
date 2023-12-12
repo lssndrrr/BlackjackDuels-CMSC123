@@ -144,6 +144,8 @@ public:
     // Constructor
     Record();
     Record(string, int);
+    string getUsername();
+    string getPoints();
 };
 
 // Leaderboard singly linked list implementation
@@ -168,6 +170,8 @@ public:
     void deleteRecords();
     void readData();
     void writeData();
+
+    Record* operator[](int);
     // void displayData();
 };
 
