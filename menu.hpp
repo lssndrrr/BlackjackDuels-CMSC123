@@ -26,6 +26,7 @@ class menu {
     Texture Titletexture;
     Texture Buttontexture;
     Texture Tutorialtexture;
+    Texture BGtexture;
     Image icon;
 
     //Music and SFX
@@ -36,6 +37,7 @@ class menu {
     //sprites
     Sprite Death;
     Sprite mainMenuBG;
+    Sprite BG;
     Sprite Title;
     Sprite Tutorial;
     Font font;
@@ -58,7 +60,7 @@ class menu {
     Leaderboard winners;
 
     //clock
-    Clock loop;
+    Clock loop, BGloop;
 
 public:
     menu();
@@ -76,6 +78,7 @@ public:
     void render();
     void createGame();
     void titleLoop();
+    void bgLoop();
 };
 
 #endif // !MENU_HPP

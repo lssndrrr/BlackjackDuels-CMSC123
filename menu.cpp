@@ -38,6 +38,48 @@ void menu::titleLoop() {
     Title.setPosition(positionTitle);
 }
 
+void menu::bgLoop() {
+    if(BGloop.getElapsedTime().asMilliseconds()/100 >= 16)
+        BGloop.restart();
+
+    if(BGloop.getElapsedTime().asMilliseconds()/100 == 0)
+        MMBGtexture.loadFromFile("Textures/background/00.png");
+    else if(BGloop.getElapsedTime().asMilliseconds()/100 == 1)
+        MMBGtexture.loadFromFile("Textures/background/01.png");
+    else if(BGloop.getElapsedTime().asMilliseconds()/100 == 2)
+        MMBGtexture.loadFromFile("Textures/background/02.png");
+    else if(BGloop.getElapsedTime().asMilliseconds()/100 == 3)
+        MMBGtexture.loadFromFile("Textures/background/03.png");
+    else if(BGloop.getElapsedTime().asMilliseconds()/100 == 4)
+        MMBGtexture.loadFromFile("Textures/background/04.png");
+    else if(BGloop.getElapsedTime().asMilliseconds()/100 == 5)
+        MMBGtexture.loadFromFile("Textures/background/05.png");
+    else if(BGloop.getElapsedTime().asMilliseconds()/100 == 6)
+        MMBGtexture.loadFromFile("Textures/background/06.png");
+    else if(BGloop.getElapsedTime().asMilliseconds()/100 == 7)
+        MMBGtexture.loadFromFile("Textures/background/07.png");
+    else if(BGloop.getElapsedTime().asMilliseconds()/100 == 8)
+        MMBGtexture.loadFromFile("Textures/background/08.png");
+    else if(BGloop.getElapsedTime().asMilliseconds()/100 == 9)
+        MMBGtexture.loadFromFile("Textures/background/09.png");
+    else if(BGloop.getElapsedTime().asMilliseconds()/100 == 10)
+        MMBGtexture.loadFromFile("Textures/background/10.png");
+    else if(BGloop.getElapsedTime().asMilliseconds()/100 == 11)
+        MMBGtexture.loadFromFile("Textures/background/11.png");
+    else if(BGloop.getElapsedTime().asMilliseconds()/100 == 12)
+        MMBGtexture.loadFromFile("Textures/background/12.png");
+    else if(BGloop.getElapsedTime().asMilliseconds()/100 == 13)
+        MMBGtexture.loadFromFile("Textures/background/13.png");
+    else if(BGloop.getElapsedTime().asMilliseconds()/100 == 14)
+        MMBGtexture.loadFromFile("Textures/background/14.png");
+    else if(BGloop.getElapsedTime().asMilliseconds()/100 == 15)
+        MMBGtexture.loadFromFile("Textures/background/15.png");
+
+    mainMenuBG.setTexture(MMBGtexture);
+    mainMenuBG.setScale(1.5f, 1.5f);
+    mainMenuBG.setPosition(0, 0);
+}
+
 void menu::intMenuTex() {
     Vector2f windowSize = Vector2f(window->getSize());
 
@@ -51,8 +93,8 @@ void menu::intMenuTex() {
         cout << "ERROR::clickButton" << endl;
     clickButton.setBuffer(clickButtonBuffer);
 
-    //loading textures
-    if(!MMBGtexture.loadFromFile("Textures/mainmenubg.png")){
+    //loading texture
+    if(!BGtexture.loadFromFile("Textures/mainmenubg.png")){
         cout << "ERROR::MMBGtexture" << endl;
     }
     if(!Deathtexture.loadFromFile("Textures/death.png")){
@@ -75,7 +117,7 @@ void menu::intMenuTex() {
     }
 
     //setting textures
-    mainMenuBG.setTexture(MMBGtexture);
+    BG.setTexture(BGtexture);
     Death.setTexture(Deathtexture);
     window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
     playButton.setButton("START!", Vector2f(280.0, 70.0), 40, &Buttontexture, Color::Black, &font);
@@ -93,12 +135,12 @@ void menu::intMenuTex() {
 
 
     //scaling texture
-    mainMenuBG.setScale(windowSize.x / MMBGtexture.getSize().x, windowSize.y / MMBGtexture.getSize().y);
+    BG.setScale(windowSize.x / BGtexture.getSize().x, windowSize.y / BGtexture.getSize().y);
     Death.setScale(2.0, 2.0);
     Tutorial.setScale(windowSize.x / Tutorialtexture.getSize().x, windowSize.y / Tutorialtexture.getSize().y);
 
     //position
-    mainMenuBG.setPosition(0, 0);
+    BG.setPosition(0, 0);
     Tutorial.setPosition(0, 0);
 
     Vector2f deathSpriteSize = Death.getLocalBounds().getSize() * 2.0f;
@@ -164,6 +206,7 @@ void menu::run() {
 
 void menu::update() {
     if(this->menuState == menuState::mainMenu) {
+        bgLoop();
         titleLoop();
 
         while (this->window->pollEvent(this->event)) {
@@ -335,12 +378,12 @@ void menu::render() {
         LBButton.drawButton(*window);
     }
     else if(this->menuState == menuState::tutorialScreen) {
-        window->draw(mainMenuBG);
+        window->draw(BG);
         backButton.drawButton(*window);
         window->draw(Tutorial);
     }
     else if(this->menuState == menuState::leaderboard) {
-        window->draw(mainMenuBG);
+        window->draw(BG);
         backButton.drawButton(*window);
         window->draw(lbText);
         for(int i = 0; i < 5; i++){

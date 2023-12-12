@@ -28,7 +28,7 @@ void game::setDashboard() {
 }
 
 void game::setDeathIdle() {
-    if(idle.getElapsedTime().asMilliseconds()/100 >= 26)
+    if(idle.getElapsedTime().asMilliseconds()/100 >= 27)
         idle.restart();
 
     if(idle.getElapsedTime().asMilliseconds()/100 == 0)
@@ -83,6 +83,8 @@ void game::setDeathIdle() {
         deathIdleTex.loadFromFile("Textures/death_idle/24.png");
     else if(idle.getElapsedTime().asMilliseconds()/100 == 25)
         deathIdleTex.loadFromFile("Textures/death_idle/25.png");
+    else if(idle.getElapsedTime().asMilliseconds()/100 == 26)
+        deathIdleTex.loadFromFile("Textures/death_idle/26.png");
 
     deathIdle.setTexture(deathIdleTex);
     deathIdle.setPosition((window->getSize().x / 2) - ((deathIdle.getGlobalBounds().width / 2) - 40.f), (window->getSize().y / 2) - (deathIdle.getGlobalBounds().height / 2 + 30.f));
