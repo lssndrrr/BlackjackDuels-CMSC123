@@ -521,6 +521,7 @@ void game::renderMainGame(){
     window->draw(mainGameBGTop);
     window->draw(deathIdle);
     window->draw(mainGameBGBottom);
+    window->draw(points);
     window->draw(candle1);
     window->draw(candle2);
     window->draw(p);

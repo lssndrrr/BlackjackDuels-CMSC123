@@ -15,6 +15,16 @@ void game::updatePlayerNum() {
     p.setTexture(pTex);
     p.setScale(2, 2);
     p.setPosition(50.f, 25.f);
+
+    points.setFont(font);
+
+    if(current->points <= 1)
+        points.setString(std::to_string(current->getPoints()) + " point");
+    else
+        points.setString(std::to_string(current->getPoints()) + " points");
+    points.setFillColor(Color::Red);
+    points.setCharacterSize(30);
+    points.setPosition(80.f, p.getGlobalBounds().height + 10.f);
 }
 
 void game::setDashboard() {

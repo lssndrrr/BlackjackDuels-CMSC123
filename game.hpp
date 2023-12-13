@@ -142,6 +142,7 @@ class game {
     Text loseText;
     Text enterName;
     Text username;
+    Text points;
     string input;
 
     // game logic variables
